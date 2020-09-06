@@ -17,11 +17,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $Slug
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property Collection|Role[] $roles
  * @property Collection|User[] $users
- *
  * @package App\Models
+ * @property-read int|null $roles_count
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Permiso newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Permiso newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Permiso query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Permiso whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Permiso whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Permiso whereNombre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Permiso whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Permiso whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Permiso extends Model
 {

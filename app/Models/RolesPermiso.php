@@ -13,11 +13,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ID_Role
  * @property int $ID_Permiso
  * @property bool $Verificado
- *
  * @property Permiso $permiso
  * @property Role $role
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|RolesPermiso newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RolesPermiso newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RolesPermiso query()
+ * @method static \Illuminate\Database\Eloquent\Builder|RolesPermiso whereIDPermiso($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RolesPermiso whereIDRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RolesPermiso whereVerificado($value)
+ * @mixin \Eloquent
  */
 class RolesPermiso extends Model
 {

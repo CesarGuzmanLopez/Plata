@@ -20,12 +20,23 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $recibido
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property ChatConversacione $chat_conversacione
  * @property ChatMensaje $chat_mensaje
  * @property ChatParticipante $chat_participante
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatNotificacion newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatNotificacion newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatNotificacion query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatNotificacion whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatNotificacion whereEnviado($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatNotificacion whereIDConversacion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatNotificacion whereIDMensaje($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatNotificacion whereIDParticipante($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatNotificacion whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatNotificacion whereRecibido($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatNotificacion whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatNotificacion whereVisto($value)
+ * @mixin \Eloquent
  */
 class ChatNotificacion extends Model
 {

@@ -17,11 +17,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $posicion
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property GuGrupo $gu_grupo
  * @property User $user
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|GuIntegrante newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GuIntegrante newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GuIntegrante query()
+ * @method static \Illuminate\Database\Eloquent\Builder|GuIntegrante whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GuIntegrante whereIDGrupo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GuIntegrante whereIDUser($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GuIntegrante wherePosicion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GuIntegrante whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class GuIntegrante extends Model
 {

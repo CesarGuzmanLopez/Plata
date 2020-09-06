@@ -21,13 +21,24 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $Data
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property TgCurso $tg_curso
  * @property InstitucionInstitucion $institucion_institucion
  * @property InstitucionProfesore $institucion_profesore
  * @property Collection|InstitucionGrupoAlumno[] $institucion__grupo_alumnos
- *
  * @package App\Models
+ * @property-read int|null $institucion__grupo_alumnos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupo newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupo newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupo query()
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupo whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupo whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupo whereDescripcion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupo whereIDCurso($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupo whereIDInstitucion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupo whereIDProfesor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupo whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupo whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class InstitucionGrupo extends Model
 {

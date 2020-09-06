@@ -10,14 +10,18 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ReactivosReactivoListum
- * 
+ *
  * @property int $ID_Lista_Reactivo
  * @property int $ID_Reactivo
- * 
  * @property ReactivosListasReactivo $reactivos_listas_reactivo
  * @property ReactivosReactivo $reactivos_reactivo
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivoListum newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivoListum newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivoListum query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivoListum whereIDListaReactivo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivoListum whereIDReactivo($value)
+ * @mixin \Eloquent
  */
 class ReactivosReactivoListum extends Model
 {

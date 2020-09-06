@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class Temas extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -17,13 +18,7 @@ class Temas extends Controller
      */
 
     public function index(){
-        $variables = [
-
-            'Temas'=>TgTema::get(),
-            'Cursos'=>TgCurso::get(),
-            'Grados'=>TgGradosAcademico::get(),
-        ];
-     //   return view("AltasYBajas.Temas")->with($variables);
+        return view("Administrar.Temas");
     }
 
     /**
@@ -33,7 +28,8 @@ class Temas extends Controller
      */
     public function create()
     {
-        //
+        $variable = new TgGradosAcademico();
+
     }
 
     /**

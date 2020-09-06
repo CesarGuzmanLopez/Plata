@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ReactivosRetroalimentacion
+ *
  * @property int $id
  * @property int $ID_Reactivo
  * @property int $ID_Grado
@@ -16,8 +17,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $Datos
  * @property TgGradosAcademico $tg_grados_academico
  * @property ReactivosReactivo $reactivos_reactivo
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosRetroalimentacion newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosRetroalimentacion newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosRetroalimentacion query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosRetroalimentacion whereDatos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosRetroalimentacion whereIDGrado($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosRetroalimentacion whereIDReactivo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosRetroalimentacion whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosRetroalimentacion whereRetroalimentacion($value)
+ * @mixin \Eloquent
  */
 class ReactivosRetroalimentacion extends Model
 {

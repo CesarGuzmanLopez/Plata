@@ -15,8 +15,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $client_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|OauthPersonalAccessClient newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OauthPersonalAccessClient newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OauthPersonalAccessClient query()
+ * @method static \Illuminate\Database\Eloquent\Builder|OauthPersonalAccessClient whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OauthPersonalAccessClient whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OauthPersonalAccessClient whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OauthPersonalAccessClient whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class OauthPersonalAccessClient extends Model
 {

@@ -13,11 +13,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ID_Reactivo
  * @property int $ID_Opcion
  * @property float $valor
- *
  * @property ReactivosOpcione $reactivos_opcione
  * @property ReactivosReactivo $reactivos_reactivo
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivosOpcione newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivosOpcione newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivosOpcione query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivosOpcione whereIDOpcion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivosOpcione whereIDReactivo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivosOpcione whereValor($value)
+ * @mixin \Eloquent
  */
 class ReactivosReactivosOpcione extends Model
 {

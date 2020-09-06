@@ -17,11 +17,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $intentos
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property TestsTest $tests_test
  * @property User $user
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsUsuario newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsUsuario newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsUsuario query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsUsuario whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsUsuario whereDescripcion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsUsuario whereIDTest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsUsuario whereIDUsuario($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsUsuario whereIntentos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsUsuario whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class TestsUsuario extends Model
 {

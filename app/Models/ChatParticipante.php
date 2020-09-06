@@ -17,12 +17,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $Tipo_Mensaje
  * @property string $Configuracion
  * @property int|null $ID_Participante
- *
  * @property ChatConversacione $chat_conversacione
  * @property User $user
  * @property Collection|ChatNotificacione[] $chat__notificaciones
- *
  * @package App\Models
+ * @property-read int|null $chat__notificaciones_count
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatParticipante newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatParticipante newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatParticipante query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatParticipante whereConfiguracion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatParticipante whereIDConversacion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatParticipante whereIDParticipante($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatParticipante whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatParticipante whereTipoMensaje($value)
+ * @mixin \Eloquent
  */
 class ChatParticipante extends Model
 {

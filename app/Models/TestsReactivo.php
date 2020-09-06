@@ -16,12 +16,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ID_Test
  * @property int $ID_Reactivo
  * @property int|null $tipo
- *
  * @property ReactivosReactivo $reactivos_reactivo
  * @property TestsTest $tests_test
  * @property Collection|TestsReactivoGenerado[] $tests__reactivo_generados
- *
  * @package App\Models
+ * @property-read int|null $tests__reactivo_generados_count
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsReactivo newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsReactivo newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsReactivo query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsReactivo whereIDReactivo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsReactivo whereIDTest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsReactivo whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsReactivo whereNumero($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsReactivo whereTipo($value)
+ * @mixin \Eloquent
  */
 class TestsReactivo extends Model
 {

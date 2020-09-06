@@ -17,12 +17,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $Numero_De_Preguntas
  * @property float $Suma_valor
  * @property float $Suma_tiempo
- *
  * @property TgGradosAcademico $tg_grados_academico
  * @property ReactivosReactivo $reactivos_reactivo
  * @property ReactivosTipo $reactivos_tipo
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosEstadistica newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosEstadistica newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosEstadistica query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosEstadistica whereIDGrado($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosEstadistica whereIDReactivo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosEstadistica whereIDTipo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosEstadistica whereNumeroDePreguntas($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosEstadistica whereSumaTiempo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosEstadistica whereSumaValor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosEstadistica whereValor($value)
+ * @mixin \Eloquent
  */
 class ReactivosEstadistica extends Model
 {

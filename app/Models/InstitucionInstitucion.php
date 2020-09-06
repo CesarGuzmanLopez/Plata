@@ -23,14 +23,29 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $Numero_alumnos_por_curso
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property MembresiasMembresium $membresias_membresium
  * @property User $user
  * @property Collection|InstitucionAlumno[] $institucion__alumnos
  * @property Collection|InstitucionGrupo[] $institucion__grupos
  * @property Collection|InstitucionProfesore[] $institucion__profesores
- *
  * @package App\Models
+ * @property-read int|null $institucion__alumnos_count
+ * @property-read int|null $institucion__grupos_count
+ * @property-read int|null $institucion__profesores_count
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion query()
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion whereIDMembrecia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion whereIDResponsable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion whereIDResponsable2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion whereNombreInstitucion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion whereNumeroAlumnosPorCurso($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion whereNumeroDocentesMaximos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion whereNumeroGruposMaximos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionInstitucion whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class InstitucionInstitucion extends Model
 {

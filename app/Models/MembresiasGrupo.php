@@ -19,12 +19,22 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $ID_tiket
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property GuGrupo $gu_grupo
  * @property MembresiasMembresium $membresias_membresium
  * @property MembresiasTiket $membresias_tiket
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasGrupo newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasGrupo newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasGrupo query()
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasGrupo whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasGrupo whereFin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasGrupo whereIDGrupo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasGrupo whereIDMembrecia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasGrupo whereIDTiket($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasGrupo whereInicio($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasGrupo whereNumeroMembrecia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasGrupo whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class MembresiasGrupo extends Model
 {

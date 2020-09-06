@@ -11,14 +11,18 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ReactivosOpcionesListum
- * 
+ *
  * @property int $ID_Lista_opcion
  * @property int $ID_opcion
- * 
  * @property ReactivosListasOpcione $reactivos_listas_opcione
  * @property ReactivosOpcione $reactivos_opcione
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosOpcionesListum newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosOpcionesListum newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosOpcionesListum query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosOpcionesListum whereIDListaOpcion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosOpcionesListum whereIDOpcion($value)
+ * @mixin \Eloquent
  */
 class ReactivosOpcionesListum extends Model
 {

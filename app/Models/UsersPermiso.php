@@ -12,11 +12,15 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $ID_Permiso
  * @property int $ID_Usuario
- *
  * @property Permiso $permiso
  * @property User $user
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|UsersPermiso newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UsersPermiso newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UsersPermiso query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UsersPermiso whereIDPermiso($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UsersPermiso whereIDUsuario($value)
+ * @mixin \Eloquent
  */
 class UsersPermiso extends Model
 {

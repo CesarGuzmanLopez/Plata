@@ -19,15 +19,26 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $Red_Neuronal
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property TgGradosAcademico $tg_grados_academico
  * @property User $user
  * @property IaBusqueda $ia_busqueda
  * @property Collection|IaTemasIntere[] $ia__temas_interes
  * @property Collection|IaTemasRecomendado[] $ia__temas_recomendados
  * @property Collection|IaTemasRevisado[] $ia__temas_revisados
- *
  * @package App\Models
+ * @property-read int|null $ia__temas_interes_count
+ * @property-read int|null $ia__temas_recomendados_count
+ * @property-read int|null $ia__temas_revisados_count
+ * @method static \Illuminate\Database\Eloquent\Builder|IaUsuario newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaUsuario newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaUsuario query()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaUsuario whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaUsuario whereIDGradoAcademico($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaUsuario whereIDUsuario($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaUsuario whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaUsuario whereRedNeuronal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaUsuario whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class IaUsuario extends Model
 {

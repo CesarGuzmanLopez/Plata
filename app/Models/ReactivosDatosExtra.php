@@ -12,10 +12,14 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $ID_Reactivo
  * @property string $Datos
- *
  * @property ReactivosReactivo $reactivos_reactivo
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosDatosExtra newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosDatosExtra newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosDatosExtra query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosDatosExtra whereDatos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosDatosExtra whereIDReactivo($value)
+ * @mixin \Eloquent
  */
 class ReactivosDatosExtra extends Model
 {

@@ -13,10 +13,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ID_Tema
  * @property int $ID_Subtema
  * @property float $valor
- *
  * @property TgTema $tg_tema
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|TgSubtemasDifuso newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgSubtemasDifuso newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgSubtemasDifuso query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgSubtemasDifuso whereIDSubtema($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgSubtemasDifuso whereIDTema($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgSubtemasDifuso whereValor($value)
+ * @mixin \Eloquent
  */
 class TgSubtemasDifuso extends Model
 {

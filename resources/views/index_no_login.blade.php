@@ -1,4 +1,4 @@
-@extends('layouts.app2')
+@extends('layouts.app')
 @section('nav')
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top ">
@@ -328,7 +328,7 @@
               <h4>M. C. Gabriel Guzmán</h4>
               <span>Data scientist</span>
               <p>
-Frases muy pedantes que describan a dios en la tierra         
+Frases muy pedantes que describan a dios en la tierra
      </p>
               <div class="social">
                 <a href=""><i class="fa fa-twitter"></i></a>
@@ -346,7 +346,7 @@ Frases muy pedantes que describan a dios en la tierra
               <h4>Ph. D. Antonio Reina</h4>
               <span>Product Manager</span>
                    <p>
-Frases muy pedantes que describan a dios en la tierra         
+Frases muy pedantes que describan a dios en la tierra
               </p>
               <div class="social">
                 <a href=""><i class="fa fa-twitter"></i></a>
@@ -366,7 +366,7 @@ Frases muy pedantes que describan a dios en la tierra
               <h4>Ph. D. Miguel Reina</h4>
               <span>CTO</span>
               <p>
-Frases muy pedantes que describan a dios en la tierra         
+Frases muy pedantes que describan a dios en la tierra
               </p>
               <div class="social">
                 <a href=""><i class="fa fa-twitter"></i></a>
@@ -382,7 +382,7 @@ Frases muy pedantes que describan a dios en la tierra
               <h4>César Guzmán</h4>
               <span>Software developer</span>
               <p>
-Frases muy pedantes que describan a dios en la tierra         
+Frases muy pedantes que describan a dios en la tierra
               </p>
               <div class="social">
                 <a href=""><i class="fa fa-twitter"></i></a>

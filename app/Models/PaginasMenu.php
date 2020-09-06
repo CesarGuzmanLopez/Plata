@@ -15,10 +15,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $Nombre
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property Collection|PaginasMenuItem[] $paginas__menu_items
- *
  * @package App\Models
+ * @property-read int|null $paginas__menu_items_count
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenu newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenu newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenu query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenu whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenu whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenu whereNombre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenu whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class PaginasMenu extends Model
 {

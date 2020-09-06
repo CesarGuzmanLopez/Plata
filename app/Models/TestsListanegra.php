@@ -13,11 +13,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ID_Usuario
  * @property int $ID_Test
  * @property string $Datos
- *
  * @property TestsTest $tests_test
  * @property User $user
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsListanegra newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsListanegra newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsListanegra query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsListanegra whereDatos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsListanegra whereIDTest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsListanegra whereIDUsuario($value)
+ * @mixin \Eloquent
  */
 class TestsListanegra extends Model
 {

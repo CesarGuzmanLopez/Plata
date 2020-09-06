@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
@@ -15,16 +14,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return "";})->name('/');
 Auth::routes();
-
 Route::get('/home',function (){
-    return view("home");
+return view("home");
 })->name('home');
-
-
-Route::get('/index',function (){
-    return "homdsfdse";
-})->name('/index');
-Route::get("/Principal",function (){
-    
+Route::get("/",function (){
     return view("index_no_login");
+})->name("/");
+
+Route::group(['middleware' =>"auth", 'prefix' => 'Administrar', 'as' => 'Administrar'], function () {
+    Route::resource('/Temas', 'AltasYBajas\Temas');
+});
+Route::group(['middleware' =>"auth", 'prefix' => 'getsTables', 'as' => 'getTables'], function () {
+    Route::get('/Temas', 'getsTables\Temas');
 });

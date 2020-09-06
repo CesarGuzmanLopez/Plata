@@ -14,11 +14,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ID_Respuesta
  * @property string|null $Data1
  * @property string|null $Data2
- *
  * @property ReactivosOpcione $reactivos_opcione
  * @property TestsAplicado $tests_aplicado
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsRespuestum newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsRespuestum newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsRespuestum query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsRespuestum whereData1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsRespuestum whereData2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsRespuestum whereIDRespuesta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsRespuestum whereIDTestHecho($value)
+ * @mixin \Eloquent
  */
 class TestsRespuestum extends Model
 {

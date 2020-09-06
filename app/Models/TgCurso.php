@@ -19,13 +19,25 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $Premium
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property User $user
  * @property Collection|InstitucionGrupo[] $institucion__grupos
  * @property Collection|TgCursoTemasDifuso[] $tg__curso_temas_difusos
  * @property Collection|TgGradoCursosDifuso[] $tg__grado_cursos_difusos
- *
  * @package App\Models
+ * @property-read int|null $institucion__grupos_count
+ * @property-read int|null $tg__curso_temas_difusos_count
+ * @property-read int|null $tg__grado_cursos_difusos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCurso newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCurso newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCurso query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCurso whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCurso whereDescripcion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCurso whereIDUsuarioCreador($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCurso whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCurso whereNombre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCurso wherePremium($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCurso whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class TgCurso extends Model
 {

@@ -20,12 +20,22 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $Descripcion
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property User $user
  * @property InstitucionInstitucion $institucion_institucion
  * @property Collection|InstitucionGrupoAlumno[] $institucion__grupo_alumnos
- *
  * @package App\Models
+ * @property-read int|null $institucion__grupo_alumnos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionAlumno newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionAlumno newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionAlumno query()
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionAlumno whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionAlumno whereDescripcion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionAlumno whereGradoEstudio($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionAlumno whereIDAlumno($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionAlumno whereIDInstitucion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionAlumno whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionAlumno whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class InstitucionAlumno extends Model
 {

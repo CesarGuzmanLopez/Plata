@@ -13,11 +13,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ID_Grado
  * @property int $ID_Curso
  * @property float $valor
- *
  * @property TgCurso $tg_curso
  * @property TgGradosAcademico $tg_grados_academico
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso whereIDCurso($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso whereIDGrado($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso whereValor($value)
+ * @mixin \Eloquent
  */
 class TgGradoCursosDifuso extends Model
 {

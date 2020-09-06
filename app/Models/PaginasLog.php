@@ -22,11 +22,24 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $Real_ID_User
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property PaginasPagina $paginas_pagina
  * @property User $user
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog whereAccion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog whereComponente($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog whereIDPagina($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog whereIDUsuario($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog whereIP($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog whereNombreEvento($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog whereRealIDUser($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog whereTarget($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasLog whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class PaginasLog extends Model
 {

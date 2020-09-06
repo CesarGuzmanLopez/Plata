@@ -12,11 +12,15 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $ID_Role
  * @property int $ID_Usuario
- *
  * @property Role $role
  * @property User $user
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|UsersRole newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UsersRole newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UsersRole query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UsersRole whereIDRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UsersRole whereIDUsuario($value)
+ * @mixin \Eloquent
  */
 class UsersRole extends Model
 {

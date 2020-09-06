@@ -17,11 +17,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ID_Tema_Recomendado
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property IaUsuario $ia_usuario
  * @property TgTema $tg_tema
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRecomendado newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRecomendado newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRecomendado query()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRecomendado whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRecomendado whereIDIA($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRecomendado whereIDTemaRecomendado($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRecomendado whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRecomendado whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class IaTemasRecomendado extends Model
 {

@@ -17,13 +17,24 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $Slug
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property Collection|MembresiasMembresium[] $membresias__membresia
  * @property Collection|PaginasPagina[] $paginas__paginas
  * @property Collection|Permiso[] $permisos
  * @property Collection|User[] $users
- *
  * @package App\Models
+ * @property-read int|null $membresias__membresia_count
+ * @property-read int|null $paginas__paginas_count
+ * @property-read int|null $permisos_count
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Role newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereNombre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Role extends Model
 {

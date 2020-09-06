@@ -26,7 +26,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $Duracion
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property TgGradosAcademico $tg_grados_academico
  * @property User $user
  * @property Collection|TestsAplicado[] $tests__aplicados
@@ -34,8 +33,30 @@ use Illuminate\Database\Eloquent\Model;
  * @property Collection|TestsListanegra[] $tests__listanegras
  * @property Collection|TestsReactivo[] $tests__reactivos
  * @property Collection|TestsUsuario[] $tests__usuarios
- *
  * @package App\Models
+ * @property-read int|null $tests__aplicados_count
+ * @property-read int|null $tests__generados_count
+ * @property-read int|null $tests__listanegras_count
+ * @property-read int|null $tests__reactivos_count
+ * @property-read int|null $tests__usuarios_count
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereDescripcion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereDificultadAbsoluta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereDuracion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereExamenAleatorio($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereExamenUnico($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereFechaFinal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereFechaInicio($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereIDGradoAcademico($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereIDUsuarioCreador($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereTipoText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereUmbral($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsTest whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class TestsTest extends Model
 {

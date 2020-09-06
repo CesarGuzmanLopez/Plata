@@ -25,13 +25,30 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $Activo
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property PaginasMenuItem $paginas_menu_item
  * @property PaginasMenu $paginas_menu
  * @property PaginasPagina $paginas_pagina
  * @property Collection|PaginasMenuItem[] $paginas__menu_items
- *
  * @package App\Models
+ * @property-read int|null $paginas__menu_items_count
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereActivo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereIDItemPadre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereIDMenu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereIDPagina($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereIconoClase($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereParametros($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereTarget($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereTipo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereTitulo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaginasMenuItem whereUrl($value)
+ * @mixin \Eloquent
  */
 class PaginasMenuItem extends Model
 {

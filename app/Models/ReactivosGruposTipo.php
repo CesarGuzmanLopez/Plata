@@ -11,18 +11,30 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ReactivosGruposTipo
- *<autodoc>
+ * <autodoc>
+ *
  * @property int $id
  * @property string $Nombre
  * @property string $Descripcion
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property Collection|ReactivosReactivo[] $reactivos__reactivos
  * @property Collection|ReactivosTipo[] $reactivos__tipos
  * @property Collection|ReactivosOpcione[] $reactivos__Opciones
  * @package App\Models
  * </autodoc>
+ * @property-read int|null $reactivos___opciones_count
+ * @property-read int|null $reactivos__reactivos_count
+ * @property-read int|null $reactivos__tipos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosGruposTipo newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosGruposTipo newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosGruposTipo query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosGruposTipo whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosGruposTipo whereDescripcion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosGruposTipo whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosGruposTipo whereNombre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosGruposTipo whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class ReactivosGruposTipo extends Model
 {

@@ -16,11 +16,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ID_Tema_Interes
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property IaUsuario $ia_usuario
  * @property ReactivosTemasInterest $reactivos_temas_interest
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasIntere newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasIntere newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasIntere query()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasIntere whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasIntere whereIDIA($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasIntere whereIDTemaInteres($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasIntere whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class IaTemasIntere extends Model
 {

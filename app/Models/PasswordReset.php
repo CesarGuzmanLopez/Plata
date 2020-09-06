@@ -15,10 +15,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property User $user
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|PasswordReset newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PasswordReset newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PasswordReset query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PasswordReset whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PasswordReset whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PasswordReset whereToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PasswordReset whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class PasswordReset extends Model
 {

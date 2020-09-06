@@ -18,13 +18,22 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $ID_Usuario_Creador
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property User $user
  * @property GuTipo $gu_tipo
  * @property Collection|GuIntegrante[] $gu__integrantes
  * @property Collection|MembresiasGrupo[] $membresias__grupos
- *
  * @package App\Models
+ * @property-read int|null $gu__integrantes_count
+ * @property-read int|null $membresias__grupos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|GuGrupo newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GuGrupo newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GuGrupo query()
+ * @method static \Illuminate\Database\Eloquent\Builder|GuGrupo whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GuGrupo whereIDUsuarioCreador($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GuGrupo whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GuGrupo whereTipoGrupo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GuGrupo whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class GuGrupo extends Model
 {

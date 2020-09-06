@@ -19,12 +19,22 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $ID_tiket
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property MembresiasMembresium $membresias_membresium
  * @property MembresiasTiket $membresias_tiket
  * @property User $user
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasUsuario newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasUsuario newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasUsuario query()
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasUsuario whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasUsuario whereFin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasUsuario whereIDMembrecia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasUsuario whereIDTiket($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasUsuario whereIDUsuario($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasUsuario whereInicio($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasUsuario whereNumeroMembrecia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MembresiasUsuario whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class MembresiasUsuario extends Model
 {

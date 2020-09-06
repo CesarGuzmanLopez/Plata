@@ -21,11 +21,22 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $Tiempo_dedicado_en_material
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property IaUsuario $ia_usuario
  * @property TgTema $tg_tema
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRevisado newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRevisado newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRevisado query()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRevisado whereCalificacion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRevisado whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRevisado whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRevisado whereIDIA($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRevisado whereIDTemaVisto($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRevisado whereNumeroPreguntas($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRevisado whereTiempoDedicadoEnMaterial($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRevisado whereTiempoDedicadoEnPreguntas($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaTemasRevisado whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class IaTemasRevisado extends Model
 {

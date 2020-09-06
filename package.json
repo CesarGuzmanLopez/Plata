@@ -36,6 +36,7 @@
         "isotope-layout": "^3.0.6",
         "jquery": "^3.5.1",
         "jquery-ui": "^1.12.1",
+        "jshint": "^2.12.0",
         "mathjax": "^3.1.0",
         "owl.carousel": "^2.3.4",
         "tinymce": "^5.4.2",

@@ -13,11 +13,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ID_Tema
  * @property int $ID_Curso
  * @property float $valor
- *
  * @property TgCurso $tg_curso
  * @property TgTema $tg_tema
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCursoTemasDifuso newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCursoTemasDifuso newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCursoTemasDifuso query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCursoTemasDifuso whereIDCurso($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCursoTemasDifuso whereIDTema($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgCursoTemasDifuso whereValor($value)
+ * @mixin \Eloquent
  */
 class TgCursoTemasDifuso extends Model
 {

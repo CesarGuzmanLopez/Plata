@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $ID_Usuario_Creador
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property User $user
  * @property Collection|IaUsuario[] $ia__usuarios
  * @property Collection|ReactivosEstadistica[] $reactivos__estadisticas
@@ -25,8 +24,22 @@ use Illuminate\Database\Eloquent\Model;
  * @property Collection|ReactivosRetroalimentacion[] $reactivos__retroalimentacions
  * @property Collection|TestsTest[] $tests__tests
  * @property Collection|TgGradoCursosDifuso[] $tg__grado_cursos_difusos
- *
  * @package App\Models
+ * @property-read int|null $ia__usuarios_count
+ * @property-read int|null $reactivos__estadisticas_count
+ * @property-read int|null $reactivos__popularidads_count
+ * @property-read int|null $reactivos__retroalimentacions_count
+ * @property-read int|null $tests__tests_count
+ * @property-read int|null $tg__grado_cursos_difusos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradosAcademico newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradosAcademico newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradosAcademico query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradosAcademico whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradosAcademico whereIDUsuarioCreador($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradosAcademico whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradosAcademico whereNombre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradosAcademico whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class TgGradosAcademico extends Model
 {

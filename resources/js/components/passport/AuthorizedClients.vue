@@ -3,7 +3,6 @@
         cursor: pointer;
     }
 </style>
-
 <template>
     <div>
         <div v-if="tokens.length > 0">

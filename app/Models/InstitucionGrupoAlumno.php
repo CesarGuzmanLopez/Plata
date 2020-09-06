@@ -15,11 +15,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ID_Alumno
  * @property int $Numero_lista
  * @property bool $Activo
- *
  * @property InstitucionAlumno $institucion_alumno
  * @property InstitucionGrupo $institucion_grupo
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupoAlumno newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupoAlumno newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupoAlumno query()
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupoAlumno whereActivo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupoAlumno whereIDAlumno($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupoAlumno whereIDGrupo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InstitucionGrupoAlumno whereNumeroLista($value)
+ * @mixin \Eloquent
  */
 class InstitucionGrupoAlumno extends Model
 {

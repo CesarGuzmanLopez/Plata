@@ -20,11 +20,22 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $Activo
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property ReactivosGruposTipo $reactivos_grupos_tipo
  * @property Collection|ReactivosEstadistica[] $reactivos__estadisticas
- *
  * @package App\Models
+ * @property-read int|null $reactivos__estadisticas_count
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosTipo newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosTipo newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosTipo query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosTipo whereActivo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosTipo whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosTipo whereDatos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosTipo whereIDGrupo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosTipo whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosTipo whereNombreTipo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosTipo whereRuta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosTipo whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class ReactivosTipo extends Model
 {

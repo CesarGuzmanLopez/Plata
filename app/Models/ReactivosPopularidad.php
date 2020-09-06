@@ -17,11 +17,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property float|null $Dificultad_Creador
  * @property float|null $Dificultad_Maestros
  * @property string|null $Neuronas
- *
  * @property TgGradosAcademico $tg_grados_academico
  * @property ReactivosReactivo $reactivos_reactivo
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosPopularidad newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosPopularidad newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosPopularidad query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosPopularidad whereDificultadAlumnos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosPopularidad whereDificultadCreador($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosPopularidad whereDificultadMaestros($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosPopularidad whereIDGrado($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosPopularidad whereIDReactivo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosPopularidad whereNeuronas($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosPopularidad whereValor($value)
+ * @mixin \Eloquent
  */
 class ReactivosPopularidad extends Model
 {

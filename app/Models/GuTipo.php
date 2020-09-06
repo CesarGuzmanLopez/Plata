@@ -13,10 +13,15 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $Nombre
- *
  * @property Collection|GuGrupo[] $gu__grupos
- *
  * @package App\Models
+ * @property-read int|null $gu__grupos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|GuTipo newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GuTipo newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GuTipo query()
+ * @method static \Illuminate\Database\Eloquent\Builder|GuTipo whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GuTipo whereNombre($value)
+ * @mixin \Eloquent
  */
 class GuTipo extends Model
 {

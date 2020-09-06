@@ -12,11 +12,15 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $ID_Usuario
  * @property int $ID_Grupo
- *
  * @property TestsGrupo $tests_grupo
  * @property User $user
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsIntegrante newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsIntegrante newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsIntegrante query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsIntegrante whereIDGrupo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsIntegrante whereIDUsuario($value)
+ * @mixin \Eloquent
  */
 class TestsIntegrante extends Model
 {

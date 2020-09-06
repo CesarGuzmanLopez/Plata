@@ -21,14 +21,26 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $intento
  * @property string|null $Comentarios
  * @property int|null $ID_Test
- *
  * @property TestsGenerado $tests_generado
  * @property TestsGrupo $tests_grupo
  * @property User $user
  * @property TestsTest $tests_test
  * @property Collection|TestsRespuestum[] $tests__respuesta
- *
  * @package App\Models
+ * @property-read int|null $tests__respuesta_count
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsAplicado newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsAplicado newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsAplicado query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsAplicado whereAplicado($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsAplicado whereComentarios($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsAplicado whereIDGenerado($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsAplicado whereIDGrupo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsAplicado whereIDIntegrante($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsAplicado whereIDTest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsAplicado whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsAplicado whereIntento($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TestsAplicado whereTiempo($value)
+ * @mixin \Eloquent
  */
 class TestsAplicado extends Model
 {

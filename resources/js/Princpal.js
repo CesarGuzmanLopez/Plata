@@ -17,7 +17,7 @@
 
   // Activate smooth scroll on page load with hash links in the url
   $(document).ready(function() {
-	
+
 
     if (window.location.hash) {
       var initial_nav = window.location.hash;
@@ -38,7 +38,6 @@
     $('body').append($mobile_nav);
     $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="fa fa-bars"></i></button>');
     $('body').append('<div class="mobile-nav-overly"></div>');
-
     $(document).on('click', '.mobile-nav-toggle', function(e) {
       $('body').toggleClass('mobile-nav-active');
       $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
@@ -122,7 +121,7 @@
 
   // Porfolio isotope and filter
   $(window).on('load', function() {
-/*  
+/*
   var portfolioIsotope = $('.portfolio-container').isotope({
       itemSelector: '.portfolio-item'
     });

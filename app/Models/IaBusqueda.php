@@ -17,10 +17,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $Contador
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property IaUsuario $ia_usuario
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|IaBusqueda newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaBusqueda newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaBusqueda query()
+ * @method static \Illuminate\Database\Eloquent\Builder|IaBusqueda whereBusqueda($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaBusqueda whereContador($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaBusqueda whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaBusqueda whereIDIA($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IaBusqueda whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class IaBusqueda extends Model
 {

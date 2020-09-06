@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $Nombre
  * @property string|null $Enunciado
  * @property string|null $Datos
- *
  * @property User $user
  * @property ReactivosGruposTipo $reactivos_grupos_tipo
  * @property TgTema $tg_tema
@@ -30,8 +29,24 @@ use Illuminate\Database\Eloquent\Model;
  * @property Collection|ReactivosReactivosOpcione[] $reactivos__reactivos_opciones
  * @property Collection|ReactivosRetroalimentacion[] $reactivos__retroalimentacions
  * @property Collection|TestsReactivo[] $tests__reactivos
- *
  * @package App\Models
+ * @property-read int|null $reactivos__estadisticas_count
+ * @property-read int|null $reactivos__popularidads_count
+ * @property-read int|null $reactivos__reactivos_opciones_count
+ * @property-read int|null $reactivos__retroalimentacions_count
+ * @property-read int|null $tests__reactivos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivo newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivo newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivo query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivo whereDatos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivo whereEnunciado($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivo whereIDCreador($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivo whereIDGrupoReactivos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivo whereIDTema($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivo whereIDTemaInteres($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivo whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ReactivosReactivo whereNombre($value)
+ * @mixin \Eloquent
  */
 class ReactivosReactivo extends Model
 {
