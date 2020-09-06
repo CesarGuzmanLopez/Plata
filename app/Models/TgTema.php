@@ -33,7 +33,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TgTema extends Model
 {
-
+    /**
+     * {@inheritDoc}
+     * @see \Illuminate\Database\Eloquent\Model::__construct()
+     */
+    public function __invoke(){
+            $temporal = new TgTema();
+            
+    }
+    
     protected $table = 'tg__temas';
 
     protected $casts = [

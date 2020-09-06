@@ -1,7 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,11 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-});
-
+Route::get('/', function () {return "";})->name('/');
 Auth::routes();
 
 Route::get('/home',function (){
-    return "";
+    return view("home");
 })->name('home');
+
+
+Route::get('/index',function (){
+    return "homdsfdse";
+})->name('/index');
+Route::get("/Principal",function (){
+    
+    return view("index_no_login");
+});
