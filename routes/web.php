@@ -22,8 +22,13 @@ Route::get("/",function (){
 })->name("/");
 
 Route::group(['middleware' =>"auth", 'prefix' => 'Administrar', 'as' => 'Administrar'], function () {
-    Route::resource('/Temas', 'AltasYBajas\Temas');
+    Route::resource('/Temas' , 'AltasYBajas\Temas');
+    Route::resource('/Grados', 'AltasYBajas\Grados');
+    Route::resource('/Cursos', 'AltasYBajas\Cursos');
 });
+
 Route::group(['middleware' =>"auth", 'prefix' => 'getsTables', 'as' => 'getTables'], function () {
-    Route::get('/Temas', 'getsTables\Temas');
+    Route::get('/Temas' , 'getsTables\Temas')->name("/Temas");
+    Route::get('/Grados', 'getsTables\Grados')->name("/Grados");
+    Route::get('/Cursos', 'getsTables\Cursos')->name("/Cursos");
 });

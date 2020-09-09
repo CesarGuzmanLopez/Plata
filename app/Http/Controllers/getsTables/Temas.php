@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 final class Temas extends Controller
 {
     public function __invoke(){
-        return TgTema::select('id','Nombre','Descripcion','Premium')->get();
+        $Variables=['id','Nombre','Descripcion','Premium'];
+        $inmutables=['id'];
+        $tiposVariables=["int","string","text" ,"boolean"];
+        return [$tiposVariables,$Variables,TgTema::select($Variables)->get(),$inmutables];
     }
 }

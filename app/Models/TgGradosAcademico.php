@@ -62,7 +62,7 @@ class TgGradosAcademico extends Model
 
     public function ia__usuarios()
     {
-        return $this->hasMany(IaUsuario::class, 'ID_GradoAcademico');
+         return $this->hasMany(IaUsuario::class, 'ID_GradoAcademico');
     }
 
     public function reactivos__estadisticas()
