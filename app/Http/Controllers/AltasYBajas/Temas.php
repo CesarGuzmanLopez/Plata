@@ -54,7 +54,7 @@ class Temas extends Controller{
     {
         $Variables=['id','Nombre','Descripcion','Premium'];
         $inmutables=['id'];
-        $tiposVariables=["int","string","text" ,"boolean"];
+        $tiposVariables=["int","string","json" ,"boolean"];
         if ($id==="all") {
             return [$tiposVariables,$Variables,TgTema::select($Variables)->get(),$inmutables];
         }

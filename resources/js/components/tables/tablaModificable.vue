@@ -1,5 +1,5 @@
 <template>
-	<div class="container-fluid">
+	<div class="container-fluid p-2">
 		<b-form-input v-model="filter" type="search" id="filterInput" placeholder="Search"></b-form-input>
 		<b-table
 			:items="Tabla.items"
@@ -10,7 +10,7 @@
 			outlined
 			show-empty
 			small
-            :current-page="currentPage"
+			:current-page="currentPage"
 			striped
 			id="tablaprin"
 			:tbody-transition-props="{name:'flip-list'}"
@@ -44,14 +44,14 @@
 			<b-pagination
 				v-model="currentPage"
 				:total-rows="totalRows"
-				:per-page="perPage"
+				:per-page="6"
 				align="fill"
 				size="sm"
 				class="my-0"
 			></b-pagination>
 		</b-col>
 
-        <div class="row"></div>
+		<div class="row"></div>
 		<!-- Modal que Recive los valores a modificar -->
 		<b-modal id="ModificarModal" @ok="ModificarElemento" :title="idCambiar.toString()">
 			<div v-for="(item,index) in Cambiar" :key="'CamposModificables'+index">
@@ -93,7 +93,7 @@
 							v-model="Cambiar[index].value"
 						/>
 					</div>
-					<div v-else-if="item.tipo.toUpperCase() ==='TEXT' || item.tipo.toUpperCase() ==='JSON' ">
+					<div v-else-if="item.tipo.toUpperCase() ==='TEXT' ">
 						<textarea
 							class="form-control"
 							type="checkbox"
@@ -102,87 +102,105 @@
 							v-model="Cambiar[index].value"
 						></textarea>
 					</div>
+			        <div v-else-if="item.tipo.toUpperCase() ==='JSON'">
+						<textarea
+							class="form-control"
+							type="checkbox"
+							:placeholder="index"
+							:name="index"
+							v-model="Cambiar[index].value"
+						></textarea>
+					</div>
+
+
+
+
 					<div v-else>inmodificable en este contexto</div>
 				</div>
 			</div>
 		</b-modal>
 
-		<div class="container-fluid">
-			<input type="hidden" name="_token" id="token" :value="csrf" />
-			<div class="row">
+		<div class="container-fluid bg-secondary py-4 rounded-sm">
+			<div class="container">
 				<div
 					v-for="(item, index) in Tabla.fields.map((item, index)=>{  return [item,index] ; }).filter(el => !Tabla.itemsInmutables.includes(el[0]))"
 					:key="'campo'+index"
-					class="col"
+					class="row py-2"
 				>
-					<b>{{ item[0] }}</b>
-				</div>
-				<div class="col">
-					<b>Añadir</b>
-				</div>
-			</div>
-			<div class="row">
-				<div
-					v-for="(item, index) in Tabla.fields.map((item, index)=>{  return [item,index] ; }).filter(el => !Tabla.itemsInmutables.includes(el[0]))"
-					:key="'campo'+index"
-					class="col"
-				>
-					<div
-						v-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='STRING'|| Tabla.tiposVariables[item[1]].toUpperCase() ==='STR'"
-					>
-						<input
-							class="form-control"
-							type="text"
-							:placeholder="item[0]"
-							:name="item[0]"
-							v-model="Formulario[item[0]]"
-						/>
+					<div class="col-3">
+						<label><b>{{item[0]}}</b></label>
 					</div>
-					<div
-						v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='DOUBLE' ||Tabla.tiposVariables[item[1]].toUpperCase() ==='FLOAT'"
-					>
-						<input
-							class="form-control"
-							type="number"
-							:placeholder="item[0]"
-							:name="item[0]"
-							v-model="Formulario[item[0]]"
-						/>
-					</div>
-					<div
-						v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='INTEGER' || Tabla.tiposVariables[item[1]].toUpperCase() ==='INT' "
-					>
-						<input
-							class="form-control"
-							type="number"
-							:placeholder="item[0]"
-							:name="item[0]"
-							v-model="Formulario[item[0]]"
-						/>
-					</div>
-					<div
-						v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='BOOL' || Tabla.tiposVariables[item[1]].toUpperCase() ==='BOOLEAN' "
-					>
-						<input
-							class="form-control"
-							type="checkbox"
-							:placeholder="item[0]"
-							:name="item[0]"
-							v-model="Formulario[item[0]]"
-						/>
-					</div>
-					<div
-						v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='TEXT' || Tabla.tiposVariables[item[1]].toUpperCase() ==='JSON' "
-					>
-						<textarea
-							class="form-control"
-							type="checkbox"
-							:placeholder="item[0]"
-							:name="item[0]"
-							v-model="Formulario[item[0]]"
-						></textarea>
-					</div>
-					<div v-else>Tipo de entrada no programado aun{{ Tabla.tiposVariables[item[1]] }}</div>
+					<div class="col-9">
+						<div
+							v-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='STRING'|| Tabla.tiposVariables[item[1]].toUpperCase() ==='STR'"
+						>
+							<input
+								class="form-control"
+								type="text"
+								:placeholder="item[0]"
+								:name="item[0]"
+
+								v-model="Formulario[item[0]]"
+							/>
+						</div>
+						<div
+							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='DOUBLE' ||Tabla.tiposVariables[item[1]].toUpperCase() ==='FLOAT'"
+						>
+							<input
+								class="form-control"
+								type="number"
+								:placeholder="item[0]"
+								:name="item[0]"
+								v-model="Formulario[item[0]]"
+							/>
+						</div>
+						<div
+							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='INTEGER' || Tabla.tiposVariables[item[1]].toUpperCase() ==='INT' "
+						>
+							<input
+								class="form-control"
+								type="number"
+								:placeholder="item[0]"
+								:name="item[0]"
+								v-model="Formulario[item[0]]"
+							/>
+						</div>
+						<div
+							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='BOOL' || Tabla.tiposVariables[item[1]].toUpperCase() ==='BOOLEAN' "
+						>
+							<input
+								class="form-control"
+								type="checkbox"
+								:placeholder="item[0]"
+								:name="item[0]"
+								v-model="Formulario[item[0]]"
+							/>
+						</div>
+						<div
+							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='TEXT' "
+						>
+							<textarea
+								class="form-control"
+								type="checkbox"
+								:placeholder="item[0]"
+								:name="item[0]"
+								v-model="Formulario[item[0]]"
+							></textarea>
+						</div>
+                        <div
+							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='JSON' "
+						>
+
+                        <textarea
+								class="form-control"
+								type="checkbox"
+								:placeholder="item[0]"
+								:name="item[0]"
+								v-model="Formulario[item[0]]"
+							></textarea>
+                        </div>
+					    <div v-else>Tipo de entrada no programado aun{{ Tabla.tiposVariables[item[1]] }}</div>
+                    </div>
 				</div>
 				<div class="col">
 					<button class="btn btn-primary" type="button" v-on:click="enviarItems">Add</button>
@@ -198,6 +216,8 @@ export default {
 	 * @var csrf
 	 * */
 	props: {
+
+
 		resource: String,
 		csrf: String,
 	},
@@ -212,10 +232,11 @@ export default {
 			},
 			Cambiar: {},
 			idCambiar: -1,
-            Formulario: {},
-            currentPage:1,
+			Formulario: {},
+			currentPage: 1,
 			Enviar: {},
 			filter: "",
+			totalRows: 0,
 		};
 	},
 	mounted() {
@@ -223,11 +244,14 @@ export default {
 	},
 	methods: {
 		enviarItems: function () {
-			this.Formulario._token = this.csrf;
-			axios
+            this.Formulario._token = this.csrf;
+            console.log(this.Formulario);
+            this.filter =""+this.Formulario[this.Tabla.fields.filter(el => !this.Tabla.itemsInmutables.includes(el)) [0]];
+            
+            axios
 				.post(this.resource, this.Formulario)
 				.then((Response) => {
-					this.obtenerDatos();
+                    this.obtenerDatos();
 					this.Formulario = {};
 				})
 				.catch((e) => {
@@ -261,6 +285,8 @@ export default {
 				if (Response.data[4]) {
 					this.contieneSubTabla = true;
 				} else this.contieneSubTabla = false;
+
+				this.totalRows = this.Tabla.items.length;
 			});
 		},
 		showModalActualizar: function (Data) {
@@ -271,7 +297,11 @@ export default {
 				if (!this.Tabla.itemsInmutables.includes(key)) {
 					this.Cambiar[key] = {};
 					this.Cambiar[key].value = Data.item[key];
-					this.Cambiar[key].tipo = this.Tabla.tiposVariables[i_lista];
+                    if(this.Tabla.tiposVariables[i_lista].toUpperCase()==="JSON"){
+                        this.Cambiar[key].value =JSON.parse(this.Cambiar[key].value);
+                    }
+                    this.Cambiar[key].tipo = this.Tabla.tiposVariables[i_lista];
+                    
 				}
 				i_lista += 1;
 			}
