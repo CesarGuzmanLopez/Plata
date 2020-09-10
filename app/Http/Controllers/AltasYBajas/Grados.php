@@ -54,15 +54,14 @@ class Grados extends Controller
         $Variables=['id','Nombre'];
         $inmutables=['id'];
         $tiposVariables=["int","string"];
+        $listas =[["ID_Grado","Cursos","Difuso",route('AdministrarCursos.show',"all")]];
         if ($id==="all") {
-            return [$tiposVariables,$Variables,TgGradosAcademico::select($Variables)->get(),$inmutables];
+            return [$tiposVariables,$Variables,TgGradosAcademico::select($Variables)->get(),$inmutables,$listas];
         }
         if($id==="onlyData"){
             return TgGradosAcademico::select($Variables)->get();
         }
         throw  new Exception("Error Desplegando id no definido", 1);
-
-
     }
     /**
      * Show the form for editing the specified resource.

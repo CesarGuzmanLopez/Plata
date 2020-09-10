@@ -111,10 +111,6 @@
 							v-model="Cambiar[index].value"
 						></textarea>
 					</div>
-
-
-
-
 					<div v-else>inmodificable en este contexto</div>
 				</div>
 			</div>
@@ -229,7 +225,8 @@ export default {
 				itemsInmutables: [],
 				items: [],
 				fields: [],
-			},
+            },
+            SubtablasConfiguracion:[],
 			Cambiar: {},
 			idCambiar: -1,
 			Formulario: {},
@@ -283,9 +280,17 @@ export default {
 					Element.modificar = true;
 				});
 				if (Response.data[4]) {
-					this.contieneSubTabla = true;
+                    this.SubtablasConfiguracion =[];
+                    this.contieneSubTabla = true;
+                     Response.data[4].forEach((subtabla) =>{
+                        var nuevo = {};
+                        nuevo.nombreID      =subtabla[0];
+                        nuevo.nombreCampo   =subtabla[1];
+                        nuevo.tipoRelacion  =subtabla[2];
+                        nuevo.url           =subtabla[3];
+                        this.SubtablasConfiguracion.push(nuevo);
+                    });
 				} else this.contieneSubTabla = false;
-
 				this.totalRows = this.Tabla.items.length;
 			});
 		},
