@@ -1,27 +1,23 @@
 <template>
 	<div class="container-fluid">
-        <b-form-input
-            v-model="filter"
-            type="search"
-            id="filterInput"
-            placeholder="Search"
-        ></b-form-input>
+		<b-form-input v-model="filter" type="search" id="filterInput" placeholder="Search"></b-form-input>
 		<b-table
 			:items="Tabla.items"
 			:fields="getfields()"
 			fixed
-            responsive
+			responsive
 			:per-page="6"
 			outlined
 			show-empty
 			small
-            striped
-            id="tablaprin"
-            :tbody-transition-props="{name:'flip-list'}"
-            sortable
-            :filter="filter"
-	        @filtered="onFiltered"
-    	>
+            :current-page="currentPage"
+			striped
+			id="tablaprin"
+			:tbody-transition-props="{name:'flip-list'}"
+			sortable
+			:filter="filter"
+			@filtered="onFiltered"
+		>
 			<template v-slot:cell(eliminar)="Data">
 				<button
 					class="btn btn-primary"
@@ -44,7 +40,18 @@
 				<div v-else>{{ Data.value }}</div>
 			</template>
 		</b-table>
-		<div class="row"></div>
+		<b-col sm="7" md="6" class="my-1">
+			<b-pagination
+				v-model="currentPage"
+				:total-rows="totalRows"
+				:per-page="perPage"
+				align="fill"
+				size="sm"
+				class="my-0"
+			></b-pagination>
+		</b-col>
+
+        <div class="row"></div>
 		<!-- Modal que Recive los valores a modificar -->
 		<b-modal id="ModificarModal" @ok="ModificarElemento" :title="idCambiar.toString()">
 			<div v-for="(item,index) in Cambiar" :key="'CamposModificables'+index">
@@ -186,8 +193,17 @@
 </template>
 <script>
 export default {
+	/**
+	 * @var resource : Link principal de controller of resources
+	 * @var csrf
+	 * */
+	props: {
+		resource: String,
+		csrf: String,
+	},
 	data() {
 		return {
+			contieneSubTabla: false,
 			Tabla: {
 				tiposVariables: [],
 				itemsInmutables: [],
@@ -196,18 +212,14 @@ export default {
 			},
 			Cambiar: {},
 			idCambiar: -1,
-			Formulario: {},
-            Enviar: {},
-            filter:"",
+            Formulario: {},
+            currentPage:1,
+			Enviar: {},
+			filter: "",
 		};
 	},
 	mounted() {
 		this.obtenerDatos();
-	},
-	props: {
-		getLink: String,
-		resource: String,
-		csrf: String,
 	},
 	methods: {
 		enviarItems: function () {
@@ -229,8 +241,10 @@ export default {
 			 * @var data[1] :Array fields
 			 * @var data[2] :Array items
 			 * @var data[3] :Array campos que no se pueden cambiar el primero de la lista debe ser el id
+			 * @var data[4] :{String Elemento conectado A tabla}
+			 * @var data[5] :{Array Elemntos de la tabla}
 			 */
-			axios.get(this.getLink).then((Response) => {
+			axios.get(this.resource + "/all").then((Response) => {
 				this.Tabla = {};
 				this.Tabla.tiposVariables = Response.data[0];
 				this.Tabla.fields = Response.data[1];
@@ -240,11 +254,13 @@ export default {
 				this.Tabla.itemsInmutables.push("modificar");
 				this.Tabla.fields.push("eliminar");
 				this.Tabla.itemsInmutables.push("eliminar");
-
 				this.Tabla.items.forEach((Element) => {
 					Element.eliminar = true;
 					Element.modificar = true;
 				});
+				if (Response.data[4]) {
+					this.contieneSubTabla = true;
+				} else this.contieneSubTabla = false;
 			});
 		},
 		showModalActualizar: function (Data) {
@@ -283,30 +299,32 @@ export default {
 				.then((response) => {
 					this.obtenerDatos();
 				});
-        },
-        getfields: function (){
-            return this.Tabla.fields.map((item, index)=>{   return  { key: item, sortable: true} ; });
-        },
-        onFiltered(filteredItems) {
-            // Trigger pagination to update the number of buttons/pages due to filtering
-            this.totalRows = filteredItems.length
-            this.currentPage = 1
-        }
-    },
-    computed: {
-      sortOptions() {
-        // Create an options list from our fields
-        return this.fields
-          .filter(f => f.sortable)
-          .map(f => {
-            return { text: f.label, value: f.key }
-          })
-      }
-    },
+		},
+		getfields: function () {
+			return this.Tabla.fields.map((item, index) => {
+				return { key: item, sortable: true };
+			});
+		},
+		onFiltered(filteredItems) {
+			// Trigger pagination to update the number of buttons/pages due to filtering
+			this.totalRows = filteredItems.length;
+			this.currentPage = 1;
+		},
+	},
+	computed: {
+		sortOptions() {
+			// Create an options list from our fields
+			return this.fields
+				.filter((f) => f.sortable)
+				.map((f) => {
+					return { text: f.label, value: f.key };
+				});
+		},
+	},
 };
 </script>
 <style>
-    table#tablaprin .flip-list-move {
-        transition: transform 1s;
-    }
+table#tablaprin .flip-list-move {
+	transition: transform 1s;
+}
 </style>

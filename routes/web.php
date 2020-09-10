@@ -26,9 +26,3 @@ Route::group(['middleware' =>"auth", 'prefix' => 'Administrar', 'as' => 'Adminis
     Route::resource('/Grados', 'AltasYBajas\Grados');
     Route::resource('/Cursos', 'AltasYBajas\Cursos');
 });
-
-Route::group(['middleware' =>"auth", 'prefix' => 'getsTables', 'as' => 'getTables'], function () {
-    Route::get('/Temas' , 'getsTables\Temas')->name("/Temas");
-    Route::get('/Grados', 'getsTables\Grados')->name("/Grados");
-    Route::get('/Cursos', 'getsTables\Cursos')->name("/Cursos");
-});

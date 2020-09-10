@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\TgTema;
 use App\Models\User;
+use Exception;
 
 class Temas extends Controller{
     /**
@@ -43,16 +44,24 @@ class Temas extends Controller{
         $NuevoTema->ID_Usuario_Creador = auth()->user()->id;
         return $NuevoTema->save();
     }
-
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(string $id)
     {
-        //
+        $Variables=['id','Nombre','Descripcion','Premium'];
+        $inmutables=['id'];
+        $tiposVariables=["int","string","text" ,"boolean"];
+        if ($id==="all") {
+            return [$tiposVariables,$Variables,TgTema::select($Variables)->get(),$inmutables];
+        }
+        if($id==="onlyData"){
+            TgTema::select($Variables)->get();
+        }
+        throw  new Exception("Error Desplegando id no definido", 1);
     }
 
     /**

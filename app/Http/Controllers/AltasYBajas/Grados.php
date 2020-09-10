@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AltasYBajas;
 
 use App\Http\Controllers\Controller;
 use App\Models\TgGradosAcademico;
+use Exception;
 use Illuminate\Http\Request;
 
 class Grados extends Controller
@@ -45,14 +46,24 @@ class Grados extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+     public function show(String $id)
     {
-        //
-    }
+        $Variables=['id','Nombre'];
+        $inmutables=['id'];
+        $tiposVariables=["int","string"];
+        if ($id==="all") {
+            return [$tiposVariables,$Variables,TgGradosAcademico::select($Variables)->get(),$inmutables];
+        }
+        if($id==="onlyData"){
+            return TgGradosAcademico::select($Variables)->get();
+        }
+        throw  new Exception("Error Desplegando id no definido", 1);
 
+
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -80,6 +91,7 @@ class Grados extends Controller
         $Tema->ID_Usuario_Creador = auth()->user()->id;
         $Tema->save();
     }
+
     /**
      * Remove the specified resource from storage.
      *

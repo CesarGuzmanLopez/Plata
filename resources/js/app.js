@@ -46,3 +46,6 @@ require('./Princpal');
 require('./Curso.js');
 require('./Reactivos');
 });
+if ($("#app").length != 0) var app = new Vue({
+    el: '#app',
+});
