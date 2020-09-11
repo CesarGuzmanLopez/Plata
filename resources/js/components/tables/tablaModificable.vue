@@ -75,8 +75,34 @@
 						striped
 						id="TablaDifusa"
 						:tbody-transition-props="{name:'flip-list'}"
-					></b-table>
+					>
+						<template v-slot:cell(Valor)="Data">
+							<div class="row">
+								<input
+									list="tickmarks"
+									class="form-control col-12"
+									type="range"
+									v-model="ModalConnection.valores[Data.item.id]"
+								/>
+								<div class="col-12"> <input type="number" class="form-control" v-model="ModalConnection.valores[Data.item.id]"> </div>
+								<datalist id="tickmarks">
+									<option value="0"></option>
+									<option value="10"></option>
+									<option value="20"></option>
+									<option value="30"></option>
+									<option value="40"></option>
+									<option value="50"></option>
+									<option value="60"></option>
+									<option value="70"></option>
+									<option value="80"></option>
+									<option value="90"></option>
+									<option value="100"></option>
+								</datalist>
+							</div>
+						</template>
+					</b-table>
 				</div>
+
 				<div class="col-8 col-md-4">{{ ModalConnection }}</div>
 			</div>
 		</b-modal>
@@ -253,6 +279,7 @@ export default {
 				title: "",
 				tabla: { elementos: "", labels: "" },
 				activos: [],
+				valores: [],
 			},
 			SubtablasConfiguracion: [],
 			Cambiar: {},
@@ -268,9 +295,9 @@ export default {
 		this.obtenerDatos();
 	},
 	methods: {
-		enviarItems: function () {
+		enviarItems() {
 			this.Formulario._token = this.csrf;
-			console.log(this.Formulario);
+
 			this.filter =
 				"" +
 				this.Formulario[
@@ -289,7 +316,7 @@ export default {
 					console.log(e);
 				});
 		},
-		obtenerDatos: function () {
+		obtenerDatos() {
 			/**
 			 * espera recibir un array de 2 elementos
 			 * @var data[0] :Array tipos de variables en string
@@ -333,7 +360,7 @@ export default {
 				this.totalRows = this.Tabla.items.length;
 			});
 		},
-		showModalActualizar: function (Data) {
+		showModalActualizar(Data) {
 			var i_lista = 0;
 			this.Cambiar = {};
 			this.idCambiar = Data.item[this.Tabla.itemsInmutables[0]];
@@ -350,7 +377,7 @@ export default {
 			}
 			this.$root.$emit("bv::show::modal", "ModificarModal", ".btnShow");
 		},
-		ModificarElemento: function () {
+		ModificarElemento() {
 			this.Enviar = {};
 			for (var key in this.Cambiar) {
 				this.Enviar[key] = this.Cambiar[key].value;
@@ -363,7 +390,7 @@ export default {
 					this.obtenerDatos();
 				});
 		},
-		EliminarElemento: function (Data) {
+		EliminarElemento(Data) {
 			axios
 				.post(this.resource + "/" + Data.item.id, {
 					csrf: this.csrf,
@@ -373,7 +400,7 @@ export default {
 					this.obtenerDatos();
 				});
 		},
-		getfields: function () {
+		getfields() {
 			return this.Tabla.fields.map((item, index) => {
 				var vara = "none";
 				if (
@@ -407,25 +434,24 @@ export default {
 			 */
 			axios
 				.all([
-					axios.get(this.resource + "/" + Data.item.id),
-					axios.get(datosConsulta.url),
+					axios.get(this.resource + "/" + Data.item.id), //Datos del elemento echo click
+					axios.get(datosConsulta.url), //Todas las opciones
 				])
 				.then((response) => {
 					this.ModalConnection.activos = response[0].data[indice];
-                    this.ModalConnection.tabla.elementos = response[1].data;
-                    this.Escojemodal(datosConsulta);
+					this.ModalConnection.tabla.elementos = response[1].data;
+					this.Escojemodal(datosConsulta);
 				});
 		},
 		Escojemodal(datosConsulta) {
 			switch (datosConsulta.tipoRelacion.toUpperCase()) {
 				case "DIFUSO":
-					console.log(this.ModalConnection.tabla.elementos);
 					this.ModalConnection.tabla.elementos.forEach((element, index) => {
-						element.value = "asdf";
+						element.Valor = true;
+						this.ModalConnection.valores[element.id] =
+							this.ModalConnection.activosdatos ?? "0";
 					});
-
 					this.$root.$emit("bv::show::modal", "ModalListaDifuso", ".btnShow");
-
 					break;
 			}
 		},

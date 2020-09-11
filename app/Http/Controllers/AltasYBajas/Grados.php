@@ -53,7 +53,7 @@ class Grados extends Controller
         $inmutables = ['id'];
         $tiposVariables = ["int", "string"];
         $listas = [
-            ["id", "Cursos", "Difuso", route('AdministrarCursos.show', "onlyData")]
+            ["ID_Curso", "Cursos", "Difuso", route('AdministrarCursos.show', "onlyData")]
         ] ;
         if ($id === "all") {
             return [$tiposVariables, $Variables, TgGradosAcademico::select($Variables)->get(), $inmutables, $listas];
