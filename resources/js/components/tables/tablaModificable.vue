@@ -1,6 +1,7 @@
 <template>
 	<div class="container-fluid p-2">
 		<b-form-input v-model="filter" type="search" id="filterInput" placeholder="Search"></b-form-input>
+
 		<b-table
 			:items="Tabla.items"
 			:fields="getfields()"
@@ -34,12 +35,20 @@
 				<button class="btn btn-primary" type="button" v-on:click="showModalActualizar(Data)">Modificar</button>
 			</template>
 			<template v-slot:cell()="Data">
-				<div v-if="Data.value.length>15">
+				<div v-if="SubtablasConfiguracion.find(element => element.nombreCampo ===Data.field.key)">
+					<button
+						class="btn btn-primary"
+						type="button"
+						v-on:click="showModalLista(Data)"
+					>{{ Data.field.key}}</button>
+				</div>
+				<div v-else-if="Data.value.length>15">
 					<textarea class="form-control" name disabled rows="1" v-model="Data.value"></textarea>
 				</div>
 				<div v-else>{{ Data.value }}</div>
 			</template>
 		</b-table>
+
 		<b-col sm="7" md="6" class="my-1">
 			<b-pagination
 				v-model="currentPage"
@@ -51,7 +60,27 @@
 			></b-pagination>
 		</b-col>
 
-		<div class="row"></div>
+		<b-modal :title="ModalConnection.title" size="xl" id="ModalListaDifuso" ref="ModalListaDifuso">
+			<div class="row">
+				<div class="col-12 col-md-8">
+					<b-table
+						:items="ModalConnection.tabla.elementos"
+						fixed
+						responsive
+						:per-page="6"
+						outlined
+						show-empty
+						small
+						:current-page="currentPage"
+						striped
+						id="TablaDifusa"
+						:tbody-transition-props="{name:'flip-list'}"
+					></b-table>
+				</div>
+				<div class="col-8 col-md-4">{{ ModalConnection }}</div>
+			</div>
+		</b-modal>
+
 		<!-- Modal que Recive los valores a modificar -->
 		<b-modal id="ModificarModal" @ok="ModificarElemento" :title="idCambiar.toString()">
 			<div v-for="(item,index) in Cambiar" :key="'CamposModificables'+index">
@@ -102,7 +131,7 @@
 							v-model="Cambiar[index].value"
 						></textarea>
 					</div>
-			        <div v-else-if="item.tipo.toUpperCase() ==='JSON'">
+					<div v-else-if="item.tipo.toUpperCase() ==='JSON'">
 						<textarea
 							class="form-control"
 							type="checkbox"
@@ -115,7 +144,6 @@
 				</div>
 			</div>
 		</b-modal>
-
 		<div class="container-fluid bg-secondary py-4 rounded-sm">
 			<div class="container">
 				<div
@@ -124,7 +152,9 @@
 					class="row py-2"
 				>
 					<div class="col-3">
-						<label><b>{{item[0]}}</b></label>
+						<label>
+							<b>{{item[0]}}</b>
+						</label>
 					</div>
 					<div class="col-9">
 						<div
@@ -135,7 +165,6 @@
 								type="text"
 								:placeholder="item[0]"
 								:name="item[0]"
-
 								v-model="Formulario[item[0]]"
 							/>
 						</div>
@@ -172,9 +201,7 @@
 								v-model="Formulario[item[0]]"
 							/>
 						</div>
-						<div
-							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='TEXT' "
-						>
+						<div v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='TEXT' ">
 							<textarea
 								class="form-control"
 								type="checkbox"
@@ -183,20 +210,17 @@
 								v-model="Formulario[item[0]]"
 							></textarea>
 						</div>
-                        <div
-							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='JSON' "
-						>
-
-                        <textarea
+						<div v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='JSON' ">
+							<textarea
 								class="form-control"
 								type="checkbox"
 								:placeholder="item[0]"
 								:name="item[0]"
 								v-model="Formulario[item[0]]"
 							></textarea>
-                        </div>
-					    <div v-else>Tipo de entrada no programado aun{{ Tabla.tiposVariables[item[1]] }}</div>
-                    </div>
+						</div>
+						<div v-else>Tipo de entrada no programado aun{{ Tabla.tiposVariables[item[1]] }}</div>
+					</div>
 				</div>
 				<div class="col">
 					<button class="btn btn-primary" type="button" v-on:click="enviarItems">Add</button>
@@ -212,9 +236,8 @@ export default {
 	 * @var csrf
 	 * */
 	props: {
-
-
 		resource: String,
+		NombrePrincipal: String,
 		csrf: String,
 	},
 	data() {
@@ -225,8 +248,13 @@ export default {
 				itemsInmutables: [],
 				items: [],
 				fields: [],
-            },
-            SubtablasConfiguracion:[],
+			},
+			ModalConnection: {
+				title: "",
+				tabla: { elementos: "", labels: "" },
+				activos: [],
+			},
+			SubtablasConfiguracion: [],
 			Cambiar: {},
 			idCambiar: -1,
 			Formulario: {},
@@ -241,14 +269,20 @@ export default {
 	},
 	methods: {
 		enviarItems: function () {
-            this.Formulario._token = this.csrf;
-            console.log(this.Formulario);
-            this.filter =""+this.Formulario[this.Tabla.fields.filter(el => !this.Tabla.itemsInmutables.includes(el)) [0]];
-            
-            axios
+			this.Formulario._token = this.csrf;
+			console.log(this.Formulario);
+			this.filter =
+				"" +
+				this.Formulario[
+					this.Tabla.fields.filter(
+						(el) => !this.Tabla.itemsInmutables.includes(el)
+					)[0]
+				];
+
+			axios
 				.post(this.resource, this.Formulario)
 				.then((Response) => {
-                    this.obtenerDatos();
+					this.obtenerDatos();
 					this.Formulario = {};
 				})
 				.catch((e) => {
@@ -280,16 +314,21 @@ export default {
 					Element.modificar = true;
 				});
 				if (Response.data[4]) {
-                    this.SubtablasConfiguracion =[];
-                    this.contieneSubTabla = true;
-                     Response.data[4].forEach((subtabla) =>{
-                        var nuevo = {};
-                        nuevo.nombreID      =subtabla[0];
-                        nuevo.nombreCampo   =subtabla[1];
-                        nuevo.tipoRelacion  =subtabla[2];
-                        nuevo.url           =subtabla[3];
-                        this.SubtablasConfiguracion.push(nuevo);
-                    });
+					this.SubtablasConfiguracion = [];
+					this.contieneSubTabla = true;
+					Response.data[4].forEach((subtabla) => {
+						var nuevo = {};
+						nuevo.nombreID = subtabla[0];
+						nuevo.nombreCampo = subtabla[1];
+						nuevo.tipoRelacion = subtabla[2];
+						nuevo.url = subtabla[3];
+						this.SubtablasConfiguracion.push(nuevo);
+						this.Tabla.fields.push(nuevo.nombreCampo);
+						this.Tabla.itemsInmutables.push(nuevo.nombreCampo);
+						this.Tabla.items.forEach((Element) => {
+							Element[nuevo.nombreCampo] = true;
+						});
+					});
 				} else this.contieneSubTabla = false;
 				this.totalRows = this.Tabla.items.length;
 			});
@@ -302,11 +341,10 @@ export default {
 				if (!this.Tabla.itemsInmutables.includes(key)) {
 					this.Cambiar[key] = {};
 					this.Cambiar[key].value = Data.item[key];
-                    if(this.Tabla.tiposVariables[i_lista].toUpperCase()==="JSON"){
-                        this.Cambiar[key].value =JSON.parse(this.Cambiar[key].value);
-                    }
-                    this.Cambiar[key].tipo = this.Tabla.tiposVariables[i_lista];
-                    
+					if (this.Tabla.tiposVariables[i_lista].toUpperCase() === "JSON") {
+						this.Cambiar[key].value = JSON.parse(this.Cambiar[key].value);
+					}
+					this.Cambiar[key].tipo = this.Tabla.tiposVariables[i_lista];
 				}
 				i_lista += 1;
 			}
@@ -337,13 +375,59 @@ export default {
 		},
 		getfields: function () {
 			return this.Tabla.fields.map((item, index) => {
-				return { key: item, sortable: true };
+				var vara = "none";
+				if (
+					this.SubtablasConfiguracion.find(
+						(element) => element.nombreCampo === item
+					)
+				)
+					vara = "warning";
+				return { key: item, sortable: true, variant: vara };
 			});
 		},
 		onFiltered(filteredItems) {
 			// Trigger pagination to update the number of buttons/pages due to filtering
 			this.totalRows = filteredItems.length;
 			this.currentPage = 1;
+		},
+		showModalLista(Data) {
+			let datosConsulta = {};
+			let indice = 0;
+			var DatosResponseRelacion;
+			var TodasOpciones;
+			this.SubtablasConfiguracion.forEach((element, index) => {
+				if (Data.field.key === element.nombreCampo) {
+					datosConsulta = element;
+					indice = index;
+				}
+			});
+			this.ModalConnection.title = this.NombrePrincipal + " " + Data.field.key;
+			/**
+			 * obtengo los datos del elemento que estan relacionados
+			 */
+			axios
+				.all([
+					axios.get(this.resource + "/" + Data.item.id),
+					axios.get(datosConsulta.url),
+				])
+				.then((response) => {
+					this.ModalConnection.activos = response[0].data[indice];
+                    this.ModalConnection.tabla.elementos = response[1].data;
+                    this.Escojemodal(datosConsulta);
+				});
+		},
+		Escojemodal(datosConsulta) {
+			switch (datosConsulta.tipoRelacion.toUpperCase()) {
+				case "DIFUSO":
+					console.log(this.ModalConnection.tabla.elementos);
+					this.ModalConnection.tabla.elementos.forEach((element, index) => {
+						element.value = "asdf";
+					});
+
+					this.$root.$emit("bv::show::modal", "ModalListaDifuso", ".btnShow");
+
+					break;
+			}
 		},
 	},
 	computed: {

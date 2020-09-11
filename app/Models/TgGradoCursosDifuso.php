@@ -19,8 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso query()
- * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso whereIDCurso($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso whereIDGrado($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso whereIdCurso($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso whereIdGrado($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TgGradoCursosDifuso whereValor($value)
  * @mixin \Eloquent
  */
