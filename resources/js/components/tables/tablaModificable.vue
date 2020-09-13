@@ -84,7 +84,10 @@
 									type="range"
 									v-model="ModalConnection.valores[Data.item.id]"
 								/>
-								<div class="col-12"> <input type="number" class="form-control" v-model="ModalConnection.valores[Data.item.id]"> </div>
+
+								<div class="col-12">
+									<input type="number" class="form-control" v-model="ModalConnection.valores[Data.item.id]" />
+								</div>
 								<datalist id="tickmarks">
 									<option value="0"></option>
 									<option value="10"></option>
@@ -103,7 +106,7 @@
 					</b-table>
 				</div>
 
-				<div class="col-8 col-md-4">{{ ModalConnection }}</div>
+				<div class="col-8 col-md-4"></div>
 			</div>
 		</b-modal>
 
@@ -261,6 +264,7 @@ export default {
 	 * @var resource : Link principal de controller of resources
 	 * @var csrf
 	 * */
+	components: {},
 	props: {
 		resource: String,
 		NombrePrincipal: String,
@@ -268,6 +272,19 @@ export default {
 	},
 	data() {
 		return {
+			chart_data: [
+				{ hours: 20, name: "Lorem" },
+				{ hours: 30, name: "Ipsum" },
+				{ hours: 31, name: "Dolor" },
+				{ hours: 15, name: "Sit" },
+			],
+			chart_config: {
+				key: "name",
+				value: "hours",
+				color: { scheme: "schemeTableau10" },
+				radius: { inner: 80 },
+			},
+			count: 1,
 			contieneSubTabla: false,
 			Tabla: {
 				tiposVariables: [],
@@ -297,7 +314,6 @@ export default {
 	methods: {
 		enviarItems() {
 			this.Formulario._token = this.csrf;
-
 			this.filter =
 				"" +
 				this.Formulario[

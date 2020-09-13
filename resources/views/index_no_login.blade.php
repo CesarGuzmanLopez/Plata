@@ -22,7 +22,7 @@
 
       <h1 class="logo mr-auto"><a href="{{route('/')}}">PLATA</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <!-- <a href="index.html" class="logo mr-auto"><img src="png" alt="" class="img-fluid"></a>-->
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="#">Home</a></li>
@@ -72,7 +72,7 @@
 
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
+            <img src=" " class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right">
             <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
@@ -136,27 +136,27 @@
         <div class="row d-flex align-items-center">
 
           <div class="col-lg-2 col-md-4 col-6">
-            <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
+            <img src="" class="img-fluid" alt="">
           </div>
 
           <div class="col-lg-2 col-md-4 col-6">
-            <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
+            <img src="" class="img-fluid" alt="">
           </div>
 
           <div class="col-lg-2 col-md-4 col-6">
-            <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
+            <img src="" class="img-fluid" alt="">
           </div>
 
           <div class="col-lg-2 col-md-4 col-6">
-            <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
+            <img src="" class="img-fluid" alt="">
           </div>
 
           <div class="col-lg-2 col-md-4 col-6">
-            <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
+            <img src="" class="img-fluid" alt="">
           </div>
 
           <div class="col-lg-2 col-md-4 col-6">
-            <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
+            <img src="" class="img-fluid" alt="">
           </div>
 
         </div>
@@ -324,7 +324,7 @@
         <div class="row">
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
             <div class="member">
-              <img src="assets/img/team/Gabriel.jpg" alt="">
+              <img src="" alt="">
               <h4>M. C. Gabriel Guzmán</h4>
               <span>Data scientist</span>
               <p>
@@ -342,7 +342,7 @@ Frases muy pedantes que describan a dios en la tierra
 
         <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
             <div class="member">
-              <img src="assets/img/team/Antonio.png" alt="">
+              <img src="" alt="">
               <h4>Ph. D. Antonio Reina</h4>
               <span>Product Manager</span>
                    <p>
@@ -362,7 +362,7 @@ Frases muy pedantes que describan a dios en la tierra
 
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
             <div class="member">
-              <img src="assets/img/team/Miguel.png" alt="">
+              <img src="" alt="">
               <h4>Ph. D. Miguel Reina</h4>
               <span>CTO</span>
               <p>
@@ -378,7 +378,7 @@ Frases muy pedantes que describan a dios en la tierra
           </div>
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
             <div class="member">
-              <img src="assets/img/team/Cesar.jpg" alt="">
+              <img src="" alt="">
               <h4>César Guzmán</h4>
               <span>Software developer</span>
               <p>
