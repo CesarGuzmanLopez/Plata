@@ -3,19 +3,22 @@
 namespace App\Http\Controllers\AltasYBajas;
 
 use App\Http\Controllers\Controller;
+use App\Models\TgSubtemasDifuso;
 use Illuminate\Http\Request;
 use App\Models\TgTema;
 use App\Models\User;
 use Exception;
 
-class Temas extends Controller{
+class Temas extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-   public function index(){
-       return view("Administrar.Temas");
+    public function index()
+    {
+        return view("Administrar.Temas");
     }
 
     /**
@@ -23,17 +26,18 @@ class Temas extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
+    public function create()
+    {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'Nombre' => 'required|unique:tg__temas'
         ]);
@@ -55,11 +59,20 @@ class Temas extends Controller{
         $Variables=['id','Nombre','Descripcion','Premium'];
         $inmutables=['id'];
         $tiposVariables=["int","string","json" ,"boolean"];
+        $listas=[
+            ["ID_Subtema","Subtemas","Difuso",route('AdministrarTemas.show', "onlyData")]
+        ];
         if ($id==="all") {
-            return [$tiposVariables,$Variables,TgTema::select($Variables)->get(),$inmutables];
+            return [$tiposVariables,$Variables,TgTema::select($Variables)->get(),$inmutables,$listas];
         }
-        if($id==="onlyData"){
-            TgTema::select($Variables)->get();
+        if ($id==="onlyData") {
+            return TgTema::select($Variables)->get();
+        }
+        if ($id>0) {
+            return [
+                TgSubtemasDifuso::select(["ID_Subtema","valor"])->where("ID_Tema", $id)->get(),
+                TgTema::select($Variables)->whereId($id)->first()
+            ];
         }
         throw  new Exception("Error Desplegando id no definido", 1);
     }
@@ -83,15 +96,38 @@ class Temas extends Controller{
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'Nombre' => 'required'
-        ]);
-        $Tema =  TgTema::whereId($id)->first();
-        $Tema->Nombre = $request->Nombre;
-        $Tema->Descripcion = json_encode($request->Descripcion ?? '');
-        $Tema->Premium = $request->Premium ?? false;
-        $Tema->ID_Usuario_Creador = auth()->user()->id;
-        $Tema->save();
+        switch ($request->update) {
+            case 'Subtemas':
+                foreach ($request->relacionValor as $indice=>$valor) {
+                    $Elemento = TgSubtemasDifuso::where("ID_Tema", "=", $id)->where("ID_Subtema", "=", $indice);
+                    $valor = $valor??0;
+                    if ($Elemento) {
+                        $Elemento->delete();
+                    }
+                    settype($valor, 'float');
+                    if ($valor>0 || $indice==$id) {
+                        $nuevaRelacion = new TgSubtemasDifuso();
+                        $nuevaRelacion->ID_Tema         =$id;
+                        $nuevaRelacion->ID_Subtema      =$indice;
+                        $nuevaRelacion->valor           =($indice==$id)?100: $valor;
+                        $nuevaRelacion->save();
+                    }
+                }
+                return;
+            default:
+                $request->validate([
+                    'Nombre' => 'required'
+                ]);
+                $Tema =  TgTema::whereId($id)->first();
+                $Tema->Nombre = $request->Nombre;
+                $Tema->Descripcion = json_encode($request->Descripcion ?? '');
+                $Tema->Premium = $request->Premium ?? false;
+                $Tema->ID_Usuario_Creador = auth()->user()->id;
+                $Tema->save();
+                return;
+        }
+        throw new Exception("Error id no definido para actualizar", 1);
+
     }
     /**
      * Remove the specified resource from storage.

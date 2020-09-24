@@ -3,6 +3,7 @@ namespace App\Http\Controllers\AltasYBajas;
 
 use App\Http\Controllers\Controller;
 use App\Models\TgCurso;
+use App\Models\TgCursoTemasDifuso;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -53,18 +54,27 @@ class Cursos extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(String $id)
     {
         $Variables = ['id', 'Nombre', 'Descripcion', 'Premium'];
         $inmutables = ['id'];
         $tiposVariables = ["int", "string", "json", "boolean"];
-
+        $listas =[
+            ["ID_Tema","Temas","Difuso",route('AdministrarTemas.show', "onlyData")]
+        ];
         if ($id === "all") {
-            return [$tiposVariables, $Variables, TgCurso::select($Variables)->get(), $inmutables];
+            return [$tiposVariables, $Variables, TgCurso::select($Variables)->get(), $inmutables,$listas];
         }
-        if($id==="onlyData"){
+        if ($id==="onlyData") {
             return TgCurso::select($Variables)->get();
         }
+        if ($id>0) {
+            return [
+                TgCursoTemasDifuso::select(["ID_Tema","valor"])->where("ID_Curso",$id)->get(),
+                TgCurso::select($Variables)->whereId($id)->first()
+            ];
+        }
+
         throw new Exception("Error Desplegando id no definido", 1);
     }
 
@@ -76,6 +86,7 @@ class Cursos extends Controller
      */
     public function edit($id)
     {
+        return TgCursoTemasDifuso::select(["ID_Tema","valor"])->whereIDCurso($id)->get();
     }
 
     /**
@@ -87,15 +98,37 @@ class Cursos extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'Nombre' => 'required',
-        ]);
-        $Curso = TgCurso::whereId($id)->first();
-        $Curso->Nombre = $request->Nombre;
-        $Curso->Descripcion = json_encode($request->Descripcion ?? '');
-        $Curso->Premium = $request->Premium ?? false;
-        $Curso->ID_Usuario_Creador = auth()->user()->id;
-        $Curso->save();
+        switch ($request->update) {
+            case 'Temas':
+                foreach ($request->relacionValor as $indice=>$valor) {
+                    $Elemento = TgCursoTemasDifuso::where("ID_Curso", "=", $id)->where("ID_Tema", "=", $indice);
+                    $valor = $valor??0;
+                    if ($Elemento) {
+                        $Elemento->delete();
+                    }
+                    settype($valor, 'float');
+                    if ($valor>0) {
+                        $nuevaRelacion = new TgCursoTemasDifuso();
+                        $nuevaRelacion->ID_Curso    =$id;
+                        $nuevaRelacion->ID_Tema    =$indice;
+                        $nuevaRelacion->valor       = $valor;
+                        $nuevaRelacion->save();
+                    }
+                }
+                return;
+            default:
+                $request->validate([
+                'Nombre' => 'required',
+                ]);
+                $Curso = TgCurso::whereId($id)->first();
+                $Curso->Nombre = $request->Nombre;
+                $Curso->Descripcion = json_encode($request->Descripcion ?? '');
+                $Curso->Premium = $request->Premium ?? false;
+                $Curso->ID_Usuario_Creador = auth()->user()->id;
+                $Curso->save();
+                return;
+        }
+        throw new Exception("Error id no definido para actualizar", 1);
     }
     /**
      * Remove the specified resource from storage.

@@ -1,8 +1,13 @@
 <template>
 	<div class="container-fluid p-2">
-		<b-form-input v-model="filter" type="search" id="filterInput" placeholder="Search"></b-form-input>
-
-		<b-table
+       <div class="" >
+        <div class="text-center" > <b>{{NombrePrincipal}}</b></div>
+        </div>
+        <div class="form-group">
+            <label for="filterInput">Buscar</label>
+            <input v-model="filter" type="search" class="form-control-feedback" id="filterInput" placeholder="Buscar">
+        </div>
+        <b-table
 			:items="Tabla.items"
 			:fields="getfields()"
 			fixed
@@ -60,7 +65,13 @@
 			></b-pagination>
 		</b-col>
 
-		<b-modal :title="ModalConnection.title" size="xl" id="ModalListaDifuso" ref="ModalListaDifuso">
+		<b-modal
+			@ok="EditarRelacionValores"
+			:title="ModalConnection.title"
+			size="xl"
+			id="ModalListaDifuso"
+			ref="ModalListaDifuso"
+		>
 			<div class="row">
 				<div class="col-12 col-md-8">
 					<b-table
@@ -68,14 +79,18 @@
 						fixed
 						responsive
 						:per-page="6"
+						:filter="ModalConnection.tabla.filter"
 						outlined
 						show-empty
 						small
-						:current-page="currentPage"
+						:current-page="ModalConnection.tabla.currentPage"
 						striped
 						id="TablaDifusa"
 						:tbody-transition-props="{name:'flip-list'}"
 					>
+						<template v-slot:cell()="Data">
+							<div class="truncado">{{ Data.value }}</div>
+						</template>
 						<template v-slot:cell(Valor)="Data">
 							<div class="row">
 								<input
@@ -88,28 +103,20 @@
 								<div class="col-12">
 									<input type="number" class="form-control" v-model="ModalConnection.valores[Data.item.id]" />
 								</div>
-								<datalist id="tickmarks">
-									<option value="0"></option>
-									<option value="10"></option>
-									<option value="20"></option>
-									<option value="30"></option>
-									<option value="40"></option>
-									<option value="50"></option>
-									<option value="60"></option>
-									<option value="70"></option>
-									<option value="80"></option>
-									<option value="90"></option>
-									<option value="100"></option>
-								</datalist>
 							</div>
 						</template>
 					</b-table>
+					<b-pagination
+						v-model="ModalConnection.tabla.currentPage"
+						:total-rows="ModalConnection.tabla.totalRows"
+						:per-page="6"
+						align="fill"
+						size="sm"
+						class="my-0"
+					></b-pagination>
 				</div>
-
-				<div class="col-8 col-md-4"></div>
 			</div>
 		</b-modal>
-
 		<!-- Modal que Recive los valores a modificar -->
 		<b-modal id="ModificarModal" @ok="ModificarElemento" :title="idCambiar.toString()">
 			<div v-for="(item,index) in Cambiar" :key="'CamposModificables'+index">
@@ -260,11 +267,12 @@
 </template>
 <script>
 export default {
-	/**
+	/**`
 	 * @var resource : Link principal de controller of resources
 	 * @var csrf
+	 * @access
 	 * */
-	components: {},
+
 	props: {
 		resource: String,
 		NombrePrincipal: String,
@@ -272,19 +280,6 @@ export default {
 	},
 	data() {
 		return {
-			chart_data: [
-				{ hours: 20, name: "Lorem" },
-				{ hours: 30, name: "Ipsum" },
-				{ hours: 31, name: "Dolor" },
-				{ hours: 15, name: "Sit" },
-			],
-			chart_config: {
-				key: "name",
-				value: "hours",
-				color: { scheme: "schemeTableau10" },
-				radius: { inner: 80 },
-			},
-			count: 1,
 			contieneSubTabla: false,
 			Tabla: {
 				tiposVariables: [],
@@ -293,10 +288,19 @@ export default {
 				fields: [],
 			},
 			ModalConnection: {
+				NombreTabla: "",
 				title: "",
-				tabla: { elementos: "", labels: "" },
+				tabla: {
+					elementos: "",
+					labels: "",
+					filter: "",
+					currentPage: 1,
+					totalRows: 0,
+				},
+				indice: -1,
 				activos: [],
 				valores: [],
+				NombreID: "",
 			},
 			SubtablasConfiguracion: [],
 			Cambiar: {},
@@ -306,12 +310,25 @@ export default {
 			Enviar: {},
 			filter: "",
 			totalRows: 0,
+			datacollection: null,
 		};
 	},
 	mounted() {
 		this.obtenerDatos();
 	},
 	methods: {
+		EditarRelacionValores() {
+			this.Enviar = {};
+			this.Enviar.update = this.ModalConnection.NombreTabla;
+			this.Enviar.csrf = this.csrf;
+			this.Enviar._method = "PATCH";
+			this.Enviar.relacionValor = this.ModalConnection.valores;
+			axios
+				.post(this.resource + "/" + this.ModalConnection.indice, this.Enviar)
+				.then((response) => {
+					this.obtenerDatos();
+				});
+		},
 		enviarItems() {
 			this.Formulario._token = this.csrf;
 			this.filter =
@@ -438,13 +455,20 @@ export default {
 			let indice = 0;
 			var DatosResponseRelacion;
 			var TodasOpciones;
+
 			this.SubtablasConfiguracion.forEach((element, index) => {
 				if (Data.field.key === element.nombreCampo) {
 					datosConsulta = element;
 					indice = index;
 				}
 			});
-			this.ModalConnection.title = this.NombrePrincipal + " " + Data.field.key;
+			this.ModalConnection.title = this.NombrePrincipal + " ->Editar" + Data.field.key;
+			this.ModalConnection.NombreTabla = datosConsulta.nombreCampo;
+			this.ModalConnection.NombreID = datosConsulta.nombreID;
+			this.ModalConnection.totalRows = 0;
+			this.ModalConnection.currentPage = 1;
+			this.ModalConnection.indice = Data.item.id;
+
 			/**
 			 * obtengo los datos del elemento que estan relacionados
 			 */
@@ -462,10 +486,17 @@ export default {
 		Escojemodal(datosConsulta) {
 			switch (datosConsulta.tipoRelacion.toUpperCase()) {
 				case "DIFUSO":
+					this.ModalConnection.tabla.totalRows = 0;
+
 					this.ModalConnection.tabla.elementos.forEach((element, index) => {
 						element.Valor = true;
-						this.ModalConnection.valores[element.id] =
-							this.ModalConnection.activosdatos ?? "0";
+						this.ModalConnection.valores[element.id] = 0;
+						this.ModalConnection.tabla.totalRows += 1;
+					});
+					this.ModalConnection.activos.forEach((element) => {
+						this.ModalConnection.valores[
+							element[this.ModalConnection.NombreID]
+						] = element.valor;
 					});
 					this.$root.$emit("bv::show::modal", "ModalListaDifuso", ".btnShow");
 					break;
@@ -483,9 +514,19 @@ export default {
 		},
 	},
 };
+
+/**
+ * @var integer
+ */
 </script>
+
 <style>
 table#tablaprin .flip-list-move {
 	transition: transform 1s;
+}
+.truncado {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 </style>

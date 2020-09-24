@@ -15,7 +15,8 @@ class Grados extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index()
+    {
         return view("Administrar.Grados");
     }
 
@@ -24,7 +25,8 @@ class Grados extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
+    public function create()
+    {
     }
     /**
      * Store a newly created resource in storage.
@@ -32,7 +34,8 @@ class Grados extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'Nombre' => 'required|unique:tg__grados_academicos',
         ]);
@@ -48,7 +51,8 @@ class Grados extends Controller
      * @param  string  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(String $id){
+    public function show(String $id)
+    {
         $Variables = ['id', 'Nombre'];
         $inmutables = ['id'];
         $tiposVariables = ["int", "string"];
@@ -61,7 +65,8 @@ class Grados extends Controller
         if ($id === "onlyData") {
             return TgGradosAcademico::select($Variables)->get();
         }
-        if( $id>0){
+
+        if ($id>0) {
             return [
                 TgGradoCursosDifuso::select(["ID_Curso","valor"])->whereIdGrado($id)->get(),
                 TgGradosAcademico::select($Variables)->whereId($id)->first(),
@@ -75,7 +80,11 @@ class Grados extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
+    public function edit($id)
+    {
+        return [
+            TgGradoCursosDifuso::select(["ID_Curso","valor"])->whereIdGrado($id)->get(),
+        ];
     }
 
     /**
@@ -85,14 +94,38 @@ class Grados extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
-        $request->validate([
-            'Nombre' => 'required',
-        ]);
-        $Tema = TgGradosAcademico::whereId($id)->first();
-        $Tema->Nombre = $request->Nombre;
-        $Tema->ID_Usuario_Creador = auth()->user()->id;
-        $Tema->save();
+    public function update(Request $request, $id)
+    {
+        switch ($request->update) {
+            case 'Cursos':
+                foreach ($request->relacionValor as $indice=>$valor) {
+                    $Elemento = TgGradoCursosDifuso::where("ID_Curso","=",$indice)->where("ID_Grado","=",$id);
+                    $valor = $valor??0;
+                    if ($Elemento) {
+                        $Elemento->delete();
+                    }
+                    if ($valor>0) {
+                        $nuevaRelacion = new TgGradoCursosDifuso();
+                        $nuevaRelacion->ID_Grado    =$id;
+                        $nuevaRelacion->ID_Curso    =$indice;
+                        settype($valor,'float');
+                        $nuevaRelacion->valor       = $valor;
+                        $nuevaRelacion->save();
+                    }
+
+                }
+                return ;
+            default:
+                $request->validate([
+                    'Nombre' => 'required',
+                ]);
+                $Tema = TgGradosAcademico::whereId($id)->first();
+                $Tema->Nombre = $request->Nombre;
+                $Tema->ID_Usuario_Creador = auth()->user()->id;
+                $Tema->save();
+                return ;
+        }
+        throw new Exception("Error id no definido para actualizar", 1);
     }
 
     /**
@@ -101,7 +134,8 @@ class Grados extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy($id)
+    {
         $Tema = TgGradosAcademico::whereId($id)->first();
         return $Tema->delete();
     }

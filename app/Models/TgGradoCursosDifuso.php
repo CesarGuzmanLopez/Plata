@@ -26,7 +26,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TgGradoCursosDifuso extends Model
 {
-
     protected $table = 'tg__grado_cursos_difusos';
 
     public $incrementing = false;
