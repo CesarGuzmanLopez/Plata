@@ -4,7 +4,7 @@
         <div class="text-center" > <b>{{NombrePrincipal}}</b></div>
         </div>
         <div class="form-group">
-            <label for="filterInput">Buscar</label>
+            <label for="filterInput">Buscar en tabla</label>
             <input v-model="filter" type="search" class="form-control-feedback" id="filterInput" placeholder="Buscar">
         </div>
         <b-table
@@ -514,12 +514,10 @@ export default {
 		},
 	},
 };
-
 /**
  * @var integer
  */
 </script>
-
 <style>
 table#tablaprin .flip-list-move {
 	transition: transform 1s;
