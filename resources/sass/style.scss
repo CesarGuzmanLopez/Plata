@@ -1,6 +1,11 @@
 html, body {
   height: 100%;
 }
+.truncado {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
 .wrapper {
   min-height: calc(90% - 4rem);
 }

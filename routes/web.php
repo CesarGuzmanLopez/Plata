@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {return "";})->name('/');
 Auth::routes();
 Route::get('/home',function (){
 return view("home");
@@ -25,4 +24,8 @@ Route::group(['middleware' =>"auth", 'prefix' => 'Administrar', 'as' => 'Adminis
     Route::resource('/Temas' , 'AltasYBajas\Temas');
     Route::resource('/Grados', 'AltasYBajas\Grados');
     Route::resource('/Cursos', 'AltasYBajas\Cursos');
+});
+
+Route::group(['middleware' =>"auth", 'prefix' => 'Gestor', 'as' => 'Gestor'], function () {
+    Route::resource('/TGC' , 'Gestores\CursosGradosTemas');
 });

@@ -157,7 +157,6 @@ class CreateReactivos extends Migration
         Schema::dropIfExists('reactivos__opciones_lista');
         Schema::dropIfExists('reactivos__listas_opciones');
         Schema::dropIfExists('reactivos__listas_reactivo');
-        
         Schema::dropIfExists('reactivos__popularidad');
         Schema::dropIfExists('reactivos__retroalimentacion');
         Schema::dropIfExists('reactivos__estadisticas');
