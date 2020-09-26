@@ -1,13 +1,21 @@
 <template>
 	<div class="container-fluid p-2">
-       <div class="" >
-        <div class="text-center" > <b>{{NombrePrincipal}}</b></div>
-        </div>
-        <div class="form-group">
-            <label for="filterInput">Buscar en tabla</label>
-            <input v-model="filter" type="search" class="form-control-feedback" id="filterInput" placeholder="Buscar">
-        </div>
-        <b-table
+		<div class="">
+			<div class="text-center">
+				<b>{{ NombrePrincipal }}</b>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="filterInput">Buscar en tabla</label>
+			<input
+				v-model="filter"
+				type="search"
+				class="form-control-feedback"
+				id="filterInput"
+				placeholder="Buscar"
+			/>
+		</div>
+		<b-table
 			:items="Tabla.items"
 			:fields="getfields()"
 			fixed
@@ -19,7 +27,7 @@
 			:current-page="currentPage"
 			striped
 			id="tablaprin"
-			:tbody-transition-props="{name:'flip-list'}"
+			:tbody-transition-props="{ name: 'flip-list' }"
 			sortable
 			:filter="filter"
 			@filtered="onFiltered"
@@ -28,27 +36,62 @@
 				<button
 					class="btn btn-primary"
 					type="button"
-					v-on:click="$root.$emit('bv::show::modal', 'modal'+Data.item[Tabla.fields[0]], '.btnShow');"
-				>eliminar</button>
+					v-on:click="
+						$root.$emit(
+							'bv::show::modal',
+							'modal' + Data.item[Tabla.fields[0]],
+							'.btnShow'
+						)
+					"
+				>
+					eliminar
+				</button>
 				<b-modal
-					:id="'modal'+Data.item[Tabla.fields[0]]"
-					@hidden="$root.$emit('bv::hide::modal', 'modal'+Data.item[Tabla.fields[0]], '.btnShow');"
+					:id="'modal' + Data.item[Tabla.fields[0]]"
+					@hidden="
+						$root.$emit(
+							'bv::hide::modal',
+							'modal' + Data.item[Tabla.fields[0]],
+							'.btnShow'
+						)
+					"
 					@ok="EliminarElemento(Data)"
-				>Seguro que quieres eliminar el item</b-modal>
+					>Seguro que quieres eliminar el item</b-modal
+				>
 			</template>
 			<template v-slot:cell(modificar)="Data" class="bg-gray">
-				<button class="btn btn-primary" type="button" v-on:click="showModalActualizar(Data)">Modificar</button>
+				<button
+					class="btn btn-primary"
+					type="button"
+					v-on:click="showModalActualizar(Data)"
+				>
+					Modificar
+				</button>
 			</template>
 			<template v-slot:cell()="Data">
-				<div v-if="SubtablasConfiguracion.find(element => element.nombreCampo ===Data.field.key)">
+				<div
+					v-if="
+						SubtablasConfiguracion.find(
+							(element) => element.nombreCampo === Data.field.key
+						)
+					"
+				>
 					<button
 						class="btn btn-primary"
 						type="button"
 						v-on:click="showModalLista(Data)"
-					>{{ Data.field.key}}</button>
+					>
+						{{ Data.field.key }}
+					</button>
 				</div>
-				<div v-else-if="Data.value.length>15">
-					<textarea class="form-control" name disabled rows="1" v-model="Data.value"></textarea>
+				<div v-else-if="Data.value.length > 15">
+					<textarea
+						class="form-control"
+						name
+						disabled
+						rows="1"
+						v-model="Data.value"
+					></textarea>
 				</div>
 				<div v-else>{{ Data.value }}</div>
 			</template>
@@ -86,7 +129,7 @@
 						:current-page="ModalConnection.tabla.currentPage"
 						striped
 						id="TablaDifusa"
-						:tbody-transition-props="{name:'flip-list'}"
+						:tbody-transition-props="{ name: 'flip-list' }"
 					>
 						<template v-slot:cell()="Data">
 							<div class="truncado">{{ Data.value }}</div>
@@ -101,7 +144,11 @@
 								/>
 
 								<div class="col-12">
-									<input type="number" class="form-control" v-model="ModalConnection.valores[Data.item.id]" />
+									<input
+										type="number"
+										class="form-control"
+										v-model="ModalConnection.valores[Data.item.id]"
+									/>
 								</div>
 							</div>
 						</template>
@@ -118,11 +165,20 @@
 			</div>
 		</b-modal>
 		<!-- Modal que Recive los valores a modificar -->
-		<b-modal id="ModificarModal" @ok="ModificarElemento" :title="idCambiar.toString()">
-			<div v-for="(item,index) in Cambiar" :key="'CamposModificables'+index">
+		<b-modal
+			id="ModificarModal"
+			@ok="ModificarElemento"
+			:title="idCambiar.toString()"
+		>
+			<div v-for="(item, index) in Cambiar" :key="'CamposModificables' + index">
 				<div class="form-group">
-					<label for="my-input">{{index}}</label>
-					<div v-if="item.tipo.toUpperCase() ==='STRING'|| item.tipo.toUpperCase() ==='STR'">
+					<label for="my-input">{{ index }}</label>
+					<div
+						v-if="
+							item.tipo.toUpperCase() === 'STRING' ||
+							item.tipo.toUpperCase() === 'STR'
+						"
+					>
 						<input
 							class="form-control"
 							type="text"
@@ -131,7 +187,12 @@
 							v-model="Cambiar[index].value"
 						/>
 					</div>
-					<div v-else-if="item.tipo.toUpperCase() ==='DOUBLE' || item.tipo.toUpperCase() ==='FLOAT'">
+					<div
+						v-else-if="
+							item.tipo.toUpperCase() === 'DOUBLE' ||
+							item.tipo.toUpperCase() === 'FLOAT'
+						"
+					>
 						<input
 							class="form-control"
 							type="number"
@@ -140,7 +201,12 @@
 							v-model="Cambiar[index].value"
 						/>
 					</div>
-					<div v-else-if="item.tipo.toUpperCase() ==='INTEGER' || item.tipo.toUpperCase() ==='INT' ">
+					<div
+						v-else-if="
+							item.tipo.toUpperCase() === 'INTEGER' ||
+							item.tipo.toUpperCase() === 'INT'
+						"
+					>
 						<input
 							class="form-control"
 							type="number"
@@ -149,7 +215,12 @@
 							v-model="Cambiar[index].value"
 						/>
 					</div>
-					<div v-else-if="item.tipo.toUpperCase()==='BOOL' || item.tipo.toUpperCase() ==='BOOLEAN' ">
+					<div
+						v-else-if="
+							item.tipo.toUpperCase() === 'BOOL' ||
+							item.tipo.toUpperCase() === 'BOOLEAN'
+						"
+					>
 						<input
 							class="form-control"
 							type="checkbox"
@@ -158,7 +229,7 @@
 							v-model="Cambiar[index].value"
 						/>
 					</div>
-					<div v-else-if="item.tipo.toUpperCase() ==='TEXT' ">
+					<div v-else-if="item.tipo.toUpperCase() === 'TEXT'">
 						<textarea
 							class="form-control"
 							type="checkbox"
@@ -167,7 +238,7 @@
 							v-model="Cambiar[index].value"
 						></textarea>
 					</div>
-					<div v-else-if="item.tipo.toUpperCase() ==='JSON'">
+					<div v-else-if="item.tipo.toUpperCase() === 'JSON'">
 						<textarea
 							class="form-control"
 							type="checkbox"
@@ -175,6 +246,16 @@
 							:name="index"
 							v-model="Cambiar[index].value"
 						></textarea>
+					</div>
+					<div v-else-if="item.tipo.toUpperCase() === 'HTML'">
+						<editor-tiny
+							class="bg-white"
+							:images_upload_url="images_upload_url"
+							:token="csrf"
+							:placeholder="index"
+							:name="index"
+							v-model="Cambiar[index].value"
+						></editor-tiny>
 					</div>
 					<div v-else>inmodificable en este contexto</div>
 				</div>
@@ -183,18 +264,25 @@
 		<div class="container-fluid bg-secondary py-4 rounded-sm">
 			<div class="container">
 				<div
-					v-for="(item, index) in Tabla.fields.map((item, index)=>{  return [item,index] ; }).filter(el => !Tabla.itemsInmutables.includes(el[0]))"
-					:key="'campo'+index"
+					v-for="(item, index) in Tabla.fields
+						.map((item, index) => {
+							return [item, index];
+						})
+						.filter((el) => !Tabla.itemsInmutables.includes(el[0]))"
+					:key="'campo' + index"
 					class="row py-2"
 				>
 					<div class="col-3">
 						<label>
-							<b>{{item[0]}}</b>
+							<b>{{ item[0] }}</b>
 						</label>
 					</div>
 					<div class="col-9">
 						<div
-							v-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='STRING'|| Tabla.tiposVariables[item[1]].toUpperCase() ==='STR'"
+							v-if="
+								Tabla.tiposVariables[item[1]].toUpperCase() === 'STRING' ||
+								Tabla.tiposVariables[item[1]].toUpperCase() === 'STR'
+							"
 						>
 							<input
 								class="form-control"
@@ -205,7 +293,10 @@
 							/>
 						</div>
 						<div
-							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='DOUBLE' ||Tabla.tiposVariables[item[1]].toUpperCase() ==='FLOAT'"
+							v-else-if="
+								Tabla.tiposVariables[item[1]].toUpperCase() === 'DOUBLE' ||
+								Tabla.tiposVariables[item[1]].toUpperCase() === 'FLOAT'
+							"
 						>
 							<input
 								class="form-control"
@@ -216,7 +307,10 @@
 							/>
 						</div>
 						<div
-							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='INTEGER' || Tabla.tiposVariables[item[1]].toUpperCase() ==='INT' "
+							v-else-if="
+								Tabla.tiposVariables[item[1]].toUpperCase() === 'INTEGER' ||
+								Tabla.tiposVariables[item[1]].toUpperCase() === 'INT'
+							"
 						>
 							<input
 								class="form-control"
@@ -227,7 +321,10 @@
 							/>
 						</div>
 						<div
-							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='BOOL' || Tabla.tiposVariables[item[1]].toUpperCase() ==='BOOLEAN' "
+							v-else-if="
+								Tabla.tiposVariables[item[1]].toUpperCase() === 'BOOL' ||
+								Tabla.tiposVariables[item[1]].toUpperCase() === 'BOOLEAN'
+							"
 						>
 							<input
 								class="form-control"
@@ -237,7 +334,9 @@
 								v-model="Formulario[item[0]]"
 							/>
 						</div>
-						<div v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='TEXT' ">
+						<div
+							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() === 'TEXT'"
+						>
 							<textarea
 								class="form-control"
 								type="checkbox"
@@ -246,7 +345,9 @@
 								v-model="Formulario[item[0]]"
 							></textarea>
 						</div>
-						<div v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() ==='JSON' ">
+						<div
+							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() === 'JSON'"
+						>
 							<textarea
 								class="form-control"
 								type="checkbox"
@@ -255,11 +356,32 @@
 								v-model="Formulario[item[0]]"
 							></textarea>
 						</div>
-						<div v-else>Tipo de entrada no programado aun{{ Tabla.tiposVariables[item[1]] }}</div>
+						<div
+							v-else-if="Tabla.tiposVariables[item[1]].toUpperCase() === 'HTML'"
+						>
+							<editor-tiny
+								class="bg-white"
+								:images_upload_url="images_upload_url"
+								:token="csrf"
+								:name="item[0]"
+								v-model="Formulario[item[0]]"
+							></editor-tiny>
+						</div>
+						<div v-else>
+							Tipo de entrada no programado aun{{
+								Tabla.tiposVariables[item[1]]
+							}}
+						</div>
 					</div>
 				</div>
 				<div class="col">
-					<button class="btn btn-primary" type="button" v-on:click="enviarItems">Add</button>
+					<button
+						class="btn btn-primary"
+						type="button"
+						v-on:click="enviarItems"
+					>
+						Add
+					</button>
 				</div>
 			</div>
 		</div>
@@ -272,11 +394,12 @@ export default {
 	 * @var csrf
 	 * @access
 	 * */
-
+	components: {},
 	props: {
 		resource: String,
 		NombrePrincipal: String,
 		csrf: String,
+		images_upload_url: String,
 	},
 	data() {
 		return {
@@ -339,15 +462,14 @@ export default {
 					)[0]
 				];
 
-			axios
-				.post(this.resource, this.Formulario)
-				.then((Response) => {
+			try {
+				axios.post(this.resource, this.Formulario).then((Response) => {
 					this.obtenerDatos();
 					this.Formulario = {};
-				})
-				.catch((e) => {
-					console.log(e);
 				});
+			} catch (e) {
+				console.log(e);
+			}
 		},
 		obtenerDatos() {
 			/**
@@ -462,7 +584,8 @@ export default {
 					indice = index;
 				}
 			});
-			this.ModalConnection.title = this.NombrePrincipal + " ->Editar" + Data.field.key;
+			this.ModalConnection.title =
+				this.NombrePrincipal + " ->Editar" + Data.field.key;
 			this.ModalConnection.NombreTabla = datosConsulta.nombreCampo;
 			this.ModalConnection.NombreID = datosConsulta.nombreID;
 			this.ModalConnection.totalRows = 0;
@@ -503,6 +626,7 @@ export default {
 			}
 		},
 	},
+
 	computed: {
 		sortOptions() {
 			// Create an options list from our fields

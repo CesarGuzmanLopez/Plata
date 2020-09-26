@@ -39,12 +39,13 @@ class CursosGradosTemas extends Controller
     {
         $request->validate([
             'Nombre_Curso' => 'required',
-        ]); 
+        ]);
         $NuevoCurso= new TgCurso();
         $NuevoCurso->ID_Usuario_Creador = auth()->user()->id;
         $NuevoCurso->Nombre             = $request->Nombre_Curso;
-        $NuevoCurso->Descripcion        =json_encode($request->Descripcion_Curso);
+        $NuevoCurso->Descripcion        = json_encode($request->Descripcion_Curso);
         $NuevoCurso->save();
+
         if ($request->Grado) {
             $CursoGrados                =new TgGradoCursosDifuso();
             $CursoGrados->ID_Curso      =$NuevoCurso->id;
@@ -52,6 +53,7 @@ class CursosGradosTemas extends Controller
             $CursoGrados->valor         =100;
             $CursoGrados->save();
         }
+
         foreach ($request->Magnitud as $key => $value) {
             if ($value && $value>0) {
                 $CursoTemas = new TgCursoTemasDifuso();
@@ -61,8 +63,9 @@ class CursosGradosTemas extends Controller
                 $CursoTemas->save();
             }
         }
-        return $CursoGrados->ID_Curso;
+        return $NuevoCurso->id;
     }
+
     /**
      * Display the specified resource.
      *

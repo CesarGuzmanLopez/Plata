@@ -28,7 +28,7 @@ class Temas extends Controller
      */
     public function create()
     {
-        //
+
     }
     /**
      * Store a newly created resource in storage.
@@ -63,7 +63,9 @@ class Temas extends Controller
             ["ID_Subtema","Subtemas","Difuso",route('AdministrarTemas.show', "onlyData")]
         ];
         if ($id==="all") {
+        
             return [$tiposVariables,$Variables,TgTema::select($Variables)->get(),$inmutables,$listas];
+        
         }
         if ($id==="onlyData") {
             return TgTema::select($Variables)->get();

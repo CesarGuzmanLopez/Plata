@@ -108,14 +108,14 @@ class Grados extends Controller
                         $nuevaRelacion = new TgGradoCursosDifuso();
                         $nuevaRelacion->ID_Grado    =$id;
                         $nuevaRelacion->ID_Curso    =$indice;
-                        settype($valor,'float');
+                        settype($valor, 'float');
                         $nuevaRelacion->valor       = $valor;
-                        $nuevaRelacion->save();
+                        $nuevaRelacion->save()
+                        ;
                     }
-
                 }
                 return ;
-            default:
+            default :
                 $request->validate([
                     'Nombre' => 'required',
                 ]);
