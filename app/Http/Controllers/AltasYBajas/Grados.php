@@ -17,8 +17,11 @@ class Grados extends Controller
      */
     public function index()
     {
-        return view("Administrar.Grados");
-    }
+        $Data =[
+            'Titulo'=>"Administrar Grados",
+            "Ruta"  =>route("AdministrarGrados.index")
+        ];
+        return view("Administrar.Tablas")->with($Data);    }
 
     /**
      * Show the form for creating a new resource.

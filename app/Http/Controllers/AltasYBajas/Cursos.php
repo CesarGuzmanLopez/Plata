@@ -16,7 +16,12 @@ class Cursos extends Controller
      */
     public function index()
     {
-        return view("Administrar.Cursos");
+        $Data =[
+            'Titulo'=>"Administrar Cursos",
+            "Ruta"  =>route("AdministrarCursos.index")
+        ];
+        return view("Administrar.Tablas")->with($Data);
+
     }
 
     /**

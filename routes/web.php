@@ -25,9 +25,12 @@ Route::group(['middleware' =>"auth", 'prefix' => 'Administrar', 'as' => 'Adminis
     Route::resource('/Grados'   , 'AltasYBajas\Grados');
     Route::resource('/Cursos'   , 'AltasYBajas\Cursos');
     Route::resource('/Reactivos', 'AltasYBajas\Reactivos');
+    Route::resource('/Opciones' , 'AltasYBajas\Opciones');
+    
 });
 
 Route::group(['middleware' =>"auth", 'prefix' => 'Gestor', 'as' => 'Gestor'], function () {
     Route::post('/uploadImagen', 'Gestores\UploadImagen')->name('/uploadImagen');
+    
     Route::resource('/TGC' , 'Gestores\CursosGradosTemas');
 });

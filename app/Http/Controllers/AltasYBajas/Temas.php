@@ -18,7 +18,11 @@ class Temas extends Controller
      */
     public function index()
     {
-        return view("Administrar.Temas");
+        $Data =[
+            'Titulo'=>"Administrar Temas",
+            "Ruta"  =>route("AdministrarTemas.index")
+        ];
+        return view("Administrar.Tablas")->with($Data);
     }
 
     /**

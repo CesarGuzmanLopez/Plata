@@ -46,7 +46,7 @@ class CreateReactivos extends Migration
             $table->unsignedBigInteger("ID_Creador")->nullable();
             $table->string("Nombre")->unique();
             $table->longText("Enunciado")->nullable();
-            $table->json("Datos")->nullable();            
+            $table->json("Datos")->nullable();
             $table->foreign("ID_Grupo_Reactivos")->on("reactivos__grupos_tipos")->references("id")->nullOnDelete()->cascadeOnUpdate();
             $table->foreign("ID_Tema")->on("tg__temas")->references("id")->nullOnDelete()->cascadeOnUpdate();
             $table->foreign("ID_Tema_Interes")->on("reactivos__temas_interest")->references("id")->nullOnDelete()->cascadeOnUpdate();
@@ -60,18 +60,18 @@ class CreateReactivos extends Migration
             $table->longText("Enunciado2")->nullable();
             $table->json("Datos2")->nullable();
             $table->foreign("ID_Tipo_Pregunta")->on("reactivos__grupos_tipos")->references("id")->cascadeOnUpdate();
-            
+
         });
         Schema::create('reactivos__reactivos_opciones', function (Blueprint $table) {
             $table->unsignedBigInteger("ID_Reactivo");
             $table->unsignedBigInteger("ID_Opcion");
-        
+
             $table->float("valor")->default(100);
             $table->foreign("ID_Reactivo")->on("reactivos__reactivos")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign("ID_Opcion")->on("reactivos__opciones")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
             $table->primary(['ID_Reactivo','ID_Opcion']);
-     
-        
+
+
         });
         Schema::create('reactivos__datos_extras', function (Blueprint $table) {
             $table->unsignedBigInteger("ID_Reactivo");
@@ -112,16 +112,16 @@ class CreateReactivos extends Migration
             $table->float("Dificultad_Maestros")->default(0)->nullable();
             $table->json("Neuronas")->nullable();
             $table->primary(['ID_Reactivo','ID_Grado']);
-        });     
-        
+        });
+
         Schema::create('reactivos__listas_reactivo', function (Blueprint $table) {
             $table->id();
             $table->string('Nombre');
             $table->unsignedBigInteger("ID_Creador")->nullable();
             $table->foreign("ID_Creador")->on("users")->references("id")->nullOnDelete()->cascadeOnUpdate();
             $table->timestamps();
-        });    
-            
+        });
+
         Schema::create('reactivos__listas_opciones' ,function (Blueprint $table) {
             $table->id();
             $table->string('Nombre');
@@ -143,7 +143,7 @@ class CreateReactivos extends Migration
             $table->foreign("ID_Reactivo")->on("reactivos__reactivos")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
             $table->primary(['ID_Lista_Reactivo','ID_Reactivo']);
         });
-     
+
     }
 
     /**
@@ -152,7 +152,7 @@ class CreateReactivos extends Migration
      * @return void
      */
     public function down()
-    {   
+    {
         Schema::dropIfExists('reactivos__reactivo_lista');
         Schema::dropIfExists('reactivos__opciones_lista');
         Schema::dropIfExists('reactivos__listas_opciones');

@@ -16,7 +16,11 @@ class Reactivos extends Controller
      */
     public function index()
     {
-        return view("Administrar.Reactivos");
+        $Data =[
+            'Titulo'=>"Administrar Reactivos",
+            "Ruta"  =>route("AdministrarReactivos.index")
+        ];
+        return view("Administrar.Tablas")->with($Data);
     }
 
     /**
@@ -66,7 +70,7 @@ class Reactivos extends Controller
             return [$tiposVariables,$Variables,ReactivosReactivo::select($Variables)->get(),$inmutables,$listas];
         }
         if ($id==="onlyData") {
-            
+
         }
         if ($id>0) {
             return [
@@ -110,7 +114,7 @@ class Reactivos extends Controller
                 $Reactivo->Datos        = json_encode($request->Datos);
                 $Reactivo->ID_Creador   = auth()->user()->id;
                 $Reactivo->save();
-                return; 
+                return;
         }
     }
 
