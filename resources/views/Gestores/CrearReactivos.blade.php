@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid" id="CrearReactivos" urlCurso="{{ route('AdministrarCursos.index') }}" csrf="{{ csrf_token() }}"
-        urlOpciones="{{ route('AdministrarOpciones.index') }}">
-        <form-wizard @on-complete="onComplete" title="Crear Reactivo"  color="#C4CDC7" class="primary"
+    <div class="container-fluid" id="CrearReactivos" urlCurso="{{ route('AdministrarCursos.index') }}"
+        csrf="{{ csrf_token() }}" urlOpciones="{{ route('AdministrarOpciones.index') }}">
+        <form-wizard @on-complete="onComplete" title="Crear Reactivo" color="#C4CDC7" class="primary"
             subtitle="Llena el formulario para crear un curso">
             <tab-content title="Selecciona un curso" icon="fa fa-user" :before-change="validar1">
                 <div class="container">
@@ -44,7 +44,7 @@
                                 </select>
                             </div>
                         </div>
-                    </div   >
+                    </div>
                 </div>
             </tab-content>
             <tab-content title="Crear pregunta" icon="fa fa-settings" :before-change="validar2">
@@ -107,16 +107,17 @@
                                 <tbody>
                                     <tr :class="(opcionesSeleccionadas[Elemento] &&ValorRespuestas[Elemento] ) ?'bg-success':(opcionesSeleccionadas[Elemento])?'bg-danger':''"
                                         v-for="Elemento in ElementosEnLista[Activo]" :for="'Resp_'+Activo">
-                                        <td :for="'Resp_'+Elemento"><input type="checkbox"
-                                            ff3434
-                                                v-model="opcionesSeleccionadas[Elemento]" class="my-auto" :id="'Resp_'+Elemento"></td>
+                                        <td :for="'Resp_'+Elemento"><input type="checkbox" ff3434
+                                                v-model="opcionesSeleccionadas[Elemento]" class="my-auto"
+                                                :id="'Resp_'+Elemento"></td>
                                         <td>
                                             <label class="row m-0" :for="'Resp_'+Elemento">
                                                 <div class="col-10 bg-white p-2 m-0"
                                                     v-html="EnunciadosRespuestas[Elemento].substr(0,45)"></div>
-                                                <div class="col-1 p-2 m-0"><button class="bg-aqua"  @click="showOpcion(Elemento)"><i class="fa fa-eye"
-                                                            aria-hidden="true" ></i></button>
-                                                 </div>
+                                                <div class="col-1 p-2 m-0"><button class="bg-aqua"
+                                                        @click="showOpcion(Elemento)"><i class="fa fa-eye"
+                                                            aria-hidden="true"></i></button>
+                                                </div>
                                             </label>
                                         </td>
                                         <td>
@@ -133,30 +134,30 @@
                     </div>
                 </div>
                 <b-modal ref="my-modal-opcion" hide-footer title="Using Component Methods">
-                    <div v-html="EnunciadosRespuestas[verOpcion]">  </div>
+                    <div v-html="EnunciadosRespuestas[verOpcion]"> </div>
                 </b-modal>
             </tab-content>
-
             <tab-content title="Retroalimentacion" icon="fa fa-check" :before-change="validar3">
                 <h1 class="text-center">Retroalimentación</h1>
-                <editor-tiny class="bg-white border border-black"
-                :images_upload_url="'{{ route('Gestor/uploadImagen') }}'" :token="'{{ csrf_token() }}'"
-                name="Reactivo" v-model="Retroalimentacion"></editor-tiny>
+                <editor-tiny class="bg-white border border-black" :images_upload_url="'{{ route('Gestor/uploadImagen') }}'"
+                    :token="'{{ csrf_token() }}'" name="Reactivo" v-model="Retroalimentacion"></editor-tiny>
             </tab-content>
             <tab-content title="Previsualizacion" icon="fa fa-outdent">
                 <div class="container">
                     <div class="row">
                         <div class="col">
                             <label for="NumCorrectas">Numero de repuestas correctas</label>
-                            <input type="number" id="NumCorrectas" v-model="NumCorrectas" name="NumCorrectas" min="1" :max="TotalNumeroCorrectas">
+                            <input type="number" id="NumCorrectas" v-model="NumCorrectas" name="NumCorrectas" min="1"
+                                :max="TotalNumeroCorrectas">
                         </div>
                         <div class="col">
                             <label for="NumIncorrectas">Numero de repuestas incorrectas</label>
-                            <input type="number" id="NumIncorrectas" v-model="NumIncorrectas" name="NumIncorrectas" min="1" :max="TotalIncorrectas">
+                            <input type="number" id="NumIncorrectas" v-model="NumIncorrectas" name="NumIncorrectas" min="1"
+                                :max="TotalIncorrectas">
                         </div>
                         <div class="col">
-                            <button class="btn btn-success" type="button"
-                            v-on:click="PrevisualizarMultiple">Previsualizar aleatorio</button>
+                            <button class="btn btn-success" type="button" v-on:click="PrevisualizarMultiple">Previsualizar
+                                aleatorio</button>
                         </div>
                     </div>
                     <div v-html="Previsualizacion"> </div>
@@ -174,5 +175,4 @@
         </div>
     </div>
 
-    @endsection
-
+@endsection

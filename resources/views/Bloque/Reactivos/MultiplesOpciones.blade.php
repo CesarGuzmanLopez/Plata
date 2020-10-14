@@ -20,13 +20,15 @@
             <div class="row">
                 <div class="col">
                     <div class="form-check ml-4">
-                        
-                        <input class="form-check-input" type="radio" name="respuesta" id="respuestaVisual{{$Respuesta->id}}" value="{{$Respuesta->id}}">
-                        
+                        @if($Correctas>1)
+                            <input class="form-check-input" type="checkbox" name="respuesta" id="respuestaVisual{{$Respuesta->id}}" value="{{$Respuesta->id}}">
+                        @elseif($Correctas == 1)
+                            <input class="form-check-input" type="radio" name="respuesta" id="respuestaVisual{{$Respuesta->id}}" value="{{$Respuesta->id}}">
+                        @endif
                         <label class="form-check-label" for="respuestaVisual{{$Respuesta->id}}">
                           <b>{{ chr(65+$clave) }})</b>  {!!$Respuesta->Enunciado1!!}
                         </label>
-                    </div>      
+                    </div>
                 </div>
             </div>
         @endforeach
