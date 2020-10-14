@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Http\Controllers\AltasYBajas;
 
 use App\Http\Controllers\Controller;
 use App\Models\TgCurso;
 use App\Models\TgCursoTemasDifuso;
+use App\Models\TgGradoCursosDifuso;
+use App\Models\TgGradosAcademico;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -16,12 +19,11 @@ class Cursos extends Controller
      */
     public function index()
     {
-        $Data =[
-            'Titulo'=>"Administrar Cursos",
-            "Ruta"  =>route("AdministrarCursos.index")
+        $Data = [
+            'Titulo' => "Administrar Cursos",
+            "Ruta" => route("AdministrarCursos.index"),
         ];
         return view("Administrar.Tablas")->with($Data);
-
     }
 
     /**
@@ -59,24 +61,37 @@ class Cursos extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(String $id)
+    public function show(Request $request, String $id)
     {
         $Variables = ['id', 'Nombre', 'Descripcion', 'Premium'];
         $inmutables = ['id'];
         $tiposVariables = ["int", "string", "json", "boolean"];
-        $listas =[
-            ["ID_Tema","Temas","Difuso",route('AdministrarTemas.show', "onlyData")]
+        $listas = [
+            ["ID_Tema", "Temas", "Difuso", route('AdministrarTemas.show', "onlyData")],
         ];
         if ($id === "all") {
-            return [$tiposVariables, $Variables, TgCurso::select($Variables)->get(), $inmutables,$listas];
+            return [$tiposVariables, $Variables, TgCurso::select($Variables)->get(), $inmutables, $listas];
         }
-        if ($id==="onlyData") {
+        if ($id === "onlyData") {
             return TgCurso::select($Variables)->get();
         }
-        if ($id>0) {
+
+        if ($id === "Temas") {
+            $temas = TgCursoTemasDifuso::where("ID_Curso", $request->id)->get();
+            // echo dd($temas);
+            $Regreso = [];
+            foreach ($temas as $key => $value) {
+                array_push($Regreso, ["Nombre" => $value->tg_tema->Nombre, "id" => $value->tg_tema->id]);
+            }
+            return $Regreso;
+        }
+        if ($id === "Grado") {
+            return TgGradosAcademico::select(["id", "Nombre"])->whereId(TgGradoCursosDifuso::whereIdCurso($request->id)->first()->ID_Grado)->first();
+        }
+        if ($id > 0) {
             return [
-                TgCursoTemasDifuso::select(["ID_Tema","valor"])->where("ID_Curso",$id)->get(),
-                TgCurso::select($Variables)->whereId($id)->first()
+                TgCursoTemasDifuso::select(["ID_Tema", "valor"])->where("ID_Curso", $id)->get(),
+                TgCurso::select($Variables)->whereId($id)->first(),
             ];
         }
 
@@ -91,7 +106,7 @@ class Cursos extends Controller
      */
     public function edit($id)
     {
-        return TgCursoTemasDifuso::select(["ID_Tema","valor"])->whereIDCurso($id)->get();
+        return TgCursoTemasDifuso::select(["ID_Tema", "valor"])->whereIDCurso($id)->get();
     }
 
     /**
@@ -105,25 +120,25 @@ class Cursos extends Controller
     {
         switch ($request->update) {
             case 'Temas':
-                foreach ($request->relacionValor as $indice=>$valor) {
+                foreach ($request->relacionValor as $indice => $valor) {
                     $Elemento = TgCursoTemasDifuso::where("ID_Curso", "=", $id)->where("ID_Tema", "=", $indice);
-                    $valor = $valor??0;
+                    $valor = $valor ?? 0;
                     if ($Elemento) {
                         $Elemento->delete();
                     }
                     settype($valor, 'float');
-                    if ($valor>0) {
+                    if ($valor > 0) {
                         $nuevaRelacion = new TgCursoTemasDifuso();
-                        $nuevaRelacion->ID_Curso    =$id;
-                        $nuevaRelacion->ID_Tema    =$indice;
-                        $nuevaRelacion->valor       = $valor;
+                        $nuevaRelacion->ID_Curso = $id;
+                        $nuevaRelacion->ID_Tema = $indice;
+                        $nuevaRelacion->valor = $valor;
                         $nuevaRelacion->save();
                     }
                 }
                 return;
             default:
                 $request->validate([
-                'Nombre' => 'required',
+                    'Nombre' => 'required',
                 ]);
                 $Curso = TgCurso::whereId($id)->first();
                 $Curso->Nombre = $request->Nombre;

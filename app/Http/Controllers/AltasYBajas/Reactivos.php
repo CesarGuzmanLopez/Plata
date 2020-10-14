@@ -66,11 +66,11 @@ class Reactivos extends Controller
         $listas=[
        //     ["ID_Subtema","Subtemas","Difuso",route('AdministrarTemas.show', "onlyData")]
         ];
-        if ($id==="all") {
+        if ( $id ==="all") {
             return [$tiposVariables,$Variables,ReactivosReactivo::select($Variables)->get(),$inmutables,$listas];
         }
-        if ($id==="onlyData") {
-
+        if ($id ==="onlyData") {
+            return ReactivosReactivo::select($Variables)->get();
         }
         if ($id>0) {
             return [
@@ -80,16 +80,7 @@ class Reactivos extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
 
-    }
 
     /**
      * Update the specified resource in storage.

@@ -16,7 +16,7 @@ class CursosGradosTemas extends Controller
         $data = [
             "Grados"    =>$Grados->show("onlyData")
         ];
-        return view("Administrar.CGT",$data);
+        return view("Gestores.CGT",$data);
     }
 
     /**

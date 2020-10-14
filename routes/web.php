@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
@@ -13,24 +14,33 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::get('/home',function (){
-return view("home");
+
+Route::get('/home', function () {
+    return view("home");
 })->name('home');
-Route::get("/",function (){
+
+Route::get("/", function () {
     return view("index_no_login");
 })->name("/");
 
-Route::group(['middleware' =>"auth", 'prefix' => 'Administrar', 'as' => 'Administrar'], function () {
-    Route::resource('/Temas'    , 'AltasYBajas\Temas');
-    Route::resource('/Grados'   , 'AltasYBajas\Grados');
-    Route::resource('/Cursos'   , 'AltasYBajas\Cursos');
+Route::group(['middleware' => "auth", 'prefix' => 'Administrar', 'as' => 'Administrar'], function () {
+    Route::resource('/Temas', 'AltasYBajas\Temas');
+    Route::resource('/Grados', 'AltasYBajas\Grados');
+    Route::resource('/Cursos', 'AltasYBajas\Cursos');
     Route::resource('/Reactivos', 'AltasYBajas\Reactivos');
-    Route::resource('/Opciones' , 'AltasYBajas\Opciones');
+    Route::resource('/Opciones', 'AltasYBajas\Opciones');
+    Route::resource('/Retroalimentacion', 'AltasYBajas\Retroalimentacion');
     
 });
 
-Route::group(['middleware' =>"auth", 'prefix' => 'Gestor', 'as' => 'Gestor'], function () {
+Route::group(['middleware' => "auth", 'prefix' => 'Gestor', 'as' => 'Gestor'], function () {
     Route::post('/uploadImagen', 'Gestores\UploadImagen')->name('/uploadImagen');
-    
-    Route::resource('/TGC' , 'Gestores\CursosGradosTemas');
+    Route::resource('/Reactivos', 'Gestores\Reactivos');
+    Route::resource('/TGC', 'Gestores\CursosGradosTemas');
+    Route::resource('/Opciones', 'Gestores\Opciones');
+});
+
+Route::group(['middleware' => "auth", 'prefix' => 'Reactivo', 'as' => 'Reactivo'], function () {
+  Route::resource('OpcionesMultiples', 'Reactivos\OpcionesMultiples');
+  Route::post('/Multiple', 'Reactivos\Multiple')->name('/Multiple');
 });
