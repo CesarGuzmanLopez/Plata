@@ -4,8 +4,6 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\ReactivosGruposTipo;
 use App\Models\ReactivosTipo;
-
-
 class DatabaseSeeder extends Seeder
 
 {

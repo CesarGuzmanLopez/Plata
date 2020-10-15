@@ -38,14 +38,27 @@ if ($("#CrearReactivos").length != 0) {
                     EnunciadosRespuestas: [],
                     opcionesSeleccionadas: [],
                     SeleccionarTodaLista: [],
-
                     SeleccionarTodasCorrectasLista: [],
                     ValorRespuestas: [],
-                    Previsualizacion:"",
-                    TotalNumeroCorrectas:0,
-                    TotalIncorrectas:0,
-                    NumCorrectas:0,
-                    NumIncorrectas:0,
+                    Previsualizacion: "",
+                    TotalNumeroCorrectas: 0,
+                    TotalIncorrectas: 0,
+                    NumCorrectas: 0,
+                    NumIncorrectas: 0,
+
+
+                    //para multivariable
+                    MultiVariables: {
+                        Variables: [],
+                        Tipos: [],
+                        Datos:[],
+                    },
+                    MuitlvariableNuevo:{
+                        Variable:null,
+                        Tipo:null,
+                        Datos:'',
+
+                    }
                 };
 
             },
@@ -70,6 +83,7 @@ if ($("#CrearReactivos").length != 0) {
 
             },
             methods: {
+
                 onComplete() {
 
                 },
@@ -96,19 +110,19 @@ if ($("#CrearReactivos").length != 0) {
                     }
                     return true;
                 },
-                validar2(){
-                    this.TotalNumeroCorrectas=0;
-                    this.TotalIncorrectas=0;
-                    this.opcionesSeleccionadas.forEach((elemento,index)=>{
-                        if(elemento && this.ValorRespuestas[index])
-                           this.TotalNumeroCorrectas = 1+this.TotalNumeroCorrectas;
-                        else if(elemento)
-                            this.TotalIncorrectas = 1+this.TotalIncorrectas;
+                validar2() {
+                    this.TotalNumeroCorrectas = 0;
+                    this.TotalIncorrectas = 0;
+                    this.opcionesSeleccionadas.forEach((elemento, index) => {
+                        if (elemento && this.ValorRespuestas[index])
+                            this.TotalNumeroCorrectas = 1 + this.TotalNumeroCorrectas;
+                        else if (elemento)
+                            this.TotalIncorrectas = 1 + this.TotalIncorrectas;
                     });
-                    return (this.TotalIncorrectas>0 &&  this.TotalNumeroCorrectas >0)&& (this.Reactivo.length>0) ;
+                    return (this.TotalIncorrectas > 0 && this.TotalNumeroCorrectas > 0) && (this.Reactivo.length > 0);
                 },
-                validar3(){
-                     this.Previsualizacion="";
+                validar3() {
+                    this.Previsualizacion = "";
                     return true;
                 },
                 ListaSelected(contenido) {
@@ -181,41 +195,67 @@ if ($("#CrearReactivos").length != 0) {
                 },
                 PrevisualizarMultiple() {
                     console.log("Sirve");
-                    var TodasRespuestas=[];
+                    var TodasRespuestas = [];
                     var CorrectasAenviar;
-                    var NumCorrectas    =this.NumCorrectas;
-                    var NumIncorrectas  =this.NumIncorrectas;
-                    var aenviar=[];
-                    this.opcionesSeleccionadas.forEach((elemento,index)=>{
-                        if(elemento) TodasRespuestas.push(index);
+                    var NumCorrectas = this.NumCorrectas;
+                    var NumIncorrectas = this.NumIncorrectas;
+                    var aenviar = [];
+                    this.opcionesSeleccionadas.forEach((elemento, index) => {
+                        if (elemento) TodasRespuestas.push(index);
                     });
-                    while(NumCorrectas > 0 || NumIncorrectas>0 ){
-                        NumAleatorio = Math.floor(Math.random()*(TodasRespuestas.length));
-                        if(this.ValorRespuestas[TodasRespuestas[NumAleatorio]] && NumCorrectas>0 ){
-                            NumCorrectas = NumCorrectas-1;
+                    while (NumCorrectas > 0 || NumIncorrectas > 0) {
+                        NumAleatorio = Math.floor(Math.random() * (TodasRespuestas.length));
+                        if (this.ValorRespuestas[TodasRespuestas[NumAleatorio]] && NumCorrectas > 0) {
+                            NumCorrectas = NumCorrectas - 1;
                             aenviar.push(TodasRespuestas[NumAleatorio]);
-                        }else if(!this.ValorRespuestas[TodasRespuestas[NumAleatorio]] && NumIncorrectas>0){
-                            NumIncorrectas=NumIncorrectas-1;
+                        } else if (!this.ValorRespuestas[TodasRespuestas[NumAleatorio]] && NumIncorrectas > 0) {
+                            NumIncorrectas = NumIncorrectas - 1;
                             aenviar.push(TodasRespuestas[NumAleatorio]);
                         }
                         TodasRespuestas.splice(NumAleatorio, 1);
                     }
-                    data ={
-                        '_token':this.csrf,
-                        'Respuestas' :aenviar,
-                        "Pregunta"   :this.Reactivo,
-                        "Correctas"  :this.NumCorrectas,
-                        "Incorrectas":this.NumIncorrectas
-                        };
-                    try{
-                        axios.post('/Reactivo/Multiple',data).then(
-                            (response)=>{
-                                this.Previsualizacion=response.data;
+                    data = {
+                        '_token': this.csrf,
+                        'Respuestas': aenviar,
+                        "Pregunta": this.Reactivo,
+                        "Correctas": this.NumCorrectas,
+                        "Incorrectas": this.NumIncorrectas
+                    };
+                    try {
+                        axios.post('/Reactivo/Multiple', data).then(
+                            (response) => {
+                                this.Previsualizacion = response.data;
                             }
                         );
-                    }catch(e){
-                        this.Previsualizacion="<b class=\"bg-danger\">Hubo un error al tratar de visualizar</b>";
+                    } catch (e) {
+                        this.Previsualizacion = "<b class=\"bg-danger\">Hubo un error al tratar de visualizar</b>";
                     }
+                },
+                AddVariable(){
+                    if(this.MuitlvariableNuevo.Variable.length<=0 || this.MuitlvariableNuevo.Tipo ===null)
+                        return;
+                    if(this.MuitlvariableNuevo.Variable.length>20){
+                        this.MuitlvariableNuevo.Variable= this.MuitlvariableNuevo.Variable.substring(0,20);
+                    }
+                    this.MuitlvariableNuevo.Variable = this.MuitlvariableNuevo.Variable.replaceAll(" ","");
+                    if(!isNaN(this.MuitlvariableNuevo.Variable.charAt(0))){
+                        this.MuitlvariableNuevo.Variable ="N"+this.MuitlvariableNuevo.Variable ;
+                    }
+                    this.MultiVariables.Variables.push(this.MuitlvariableNuevo.Variable);
+                    this.MultiVariables.Tipos.push(this.MuitlvariableNuevo.Tipo);
+
+                    this.MultiVariables.Datos.push(this.MuitlvariableNuevo.Datos);
+                    this.MuitlvariableNuevo.Variable =null;
+                    this.MuitlvariableNuevo.Tipo =null;
+                },
+                EliminarVariable(index){
+                    this.MultiVariables.Datos.splice(index,1);
+                    this.MultiVariables.Tipos.splice(index,1);
+                    this.MultiVariables.Variables.splice(index,1);
+                    
+                },
+                AbrirModalVariable(index){
+                    this.$refs['modal-variable'].show();
                 },
             }
         });

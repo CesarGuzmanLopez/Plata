@@ -7,7 +7,7 @@
             <tab-content title="Selecciona un curso" icon="fa fa-user" :before-change="validar1">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 col-md-4 col-xl-3">
+                        <div class="col">
                             <div class="form-group">
                                 <label for="Curso">Selecciona el curso</label>
                                 <select id="Curso" v-on:click="selectedCurso" :change="selectedCurso" v-model="SelectCurso"
@@ -19,7 +19,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4 col-xl-3">
+                        <div class="col">
                             <div class="form-group">
                                 <label for="Tema">Tema</label>
                                 <select id="Tema" v-model="ID_Tema" class="form-control" name="Tema">
@@ -28,12 +28,12 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4 col-xl-3">
+                        <div class="col">
                             <div class="form-group">
                                 <p v-if="ID_Grado" class="p-4 m-2"><label><b>Grado: </b> @{{ Grado }}</label></p>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4 col-xl-3" v-if="SelectCurso">
+                        <div class="col" v-if="SelectCurso">
                             <div class="form-group">
                                 <label for="TipoPreg">Selecciona Tipo de pregunta</label>
 
@@ -49,6 +49,62 @@
             </tab-content>
             <tab-content title="Crear pregunta" icon="fa fa-settings" :before-change="validar2">
                 <div class="justify-content-center">
+                    <template v-if=" SelectTipoPreg === 'Reactivos Multivariable'">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                               <div class="container-fluid">
+                                   <b>Variables</b>
+                                   <table class="table table-light">
+                                       <thead class="thead-light">
+                                           <tr>
+                                               <th>Nombre Variable</th>
+                                               <th>Tipo Variable</th>
+                                               <th>Valores      </th>
+                                               <th>*</th>
+                                               <th>Eliminar</th>
+                                               
+                                           </tr>
+                                       </thead>
+                                       <tbody>
+                                           <tr v-for="(item, index) in MultiVariables.Variables">
+                                                <td> @{{ item }}</td>
+                                                <td>@{{MultiVariables.Tipos[index] }}</td>
+                                                <td>@{{MultiVariables.Datos[index] }}</td>
+                                                <td><button type="button" class="btn btn-secondary fa fa-cogs" v-on:click="AbrirModalVariable(index)" ></button></td>
+                                                <td><button type="button" v-on:click="EliminarVariable(index)" class="btn btn-secondary fa fa-minus-circle"></button></td>
+                                            </tr>
+                                       </tbody>
+                                       <tfoot>
+                                           <tr>
+                                            <th><input class="form-control"  size="40" maxlength="40" type="text" V-model="MuitlvariableNuevo.Variable" name="NombreVariableNueva"></th>
+                                            <th><div class="form-group">
+                                                    <select id="my-select" v-model="MuitlvariableNuevo.Tipo" class="form-control"  name="">
+                                                        <option value="Numerico">Numerico</option>
+                                                        <option value="ListaOpciones">Lista de opciones</option>
+                                                        <option value="Vectores">Lista de Vectores</option>
+
+                                                    </select>
+                                                </div>
+                                            </th>
+                                                <th>
+                                                       
+                                                </th>
+                                            <th>
+                                                <button type="button" v-on:click="AddVariable" class="btn btn-secondary fa fa-plus"></button>
+                                            </th>
+                                           </tr>
+                                       </tfoot>
+                                   </table>
+                               </div>
+                            </div>
+                            <div class="col">
+                                <h1>Reactivo</h1>
+                            <editor-tiny class="bg-white border border-black"
+                                :images_upload_url="'{{ route('Gestor/uploadImagen') }}'"
+                                :token="'{{ csrf_token() }}'" name="Reactivo" v-model="Reactivo"></editor-tiny>
+                            </div>
+                        </div>
+                    </template>
                     <template v-if="SelectTipoPreg === 'Opciones multiples' ">
                         <div class="row justify-content-center">
                             <div class="col-12 col-md-10 col-xl-8">
@@ -134,8 +190,8 @@
                                 </table>
                             </div>
                         </div>
-                        <b-modal ref="my-modal-opcion" hide-footer title="Using Component Methods">
-                            <div v-html="EnunciadosRespuestas[verOpcion]"> </div>
+                        <b-modal ref="my-modal-opcion" hide-footer title="Enunciado Respuesta Actual">
+                            <div v-html="EnunciadosRespuestas[verOpcion]"></div>
                         </b-modal>
                     </template>
                 </div>
@@ -170,13 +226,18 @@
             </tab-content>
         </form-wizard>
 
+        <b-modal ref="modal-variable" hide-footer title="Pregunta">
+            <template >
+
+            </template>
+        </b-modal>
     </div>
-    <div class="row">
+    <!-- div class="row">
         <div class="col p-2 bg-primary">primary</div>
         <div class="col p-2 bg-secondary">secundaty</div>
         <div class="col p-2 bg-info">info</div>
         <div class="col p-2 bg-warning">warning</div>
         <div class="col p-2 bg-success">succes</div>
         <div class="col p-2 bg-danger">danger</div>
-    </div>
+    </div -->
 @endsection
