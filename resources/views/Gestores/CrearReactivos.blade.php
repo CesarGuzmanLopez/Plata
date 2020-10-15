@@ -225,19 +225,11 @@
                 </div>
             </tab-content>
         </form-wizard>
-
         <b-modal ref="modal-variable" hide-footer title="Pregunta">
-            <template >
+            <template  >
 
             </template>
         </b-modal>
     </div>
-    <!-- div class="row">
-        <div class="col p-2 bg-primary">primary</div>
-        <div class="col p-2 bg-secondary">secundaty</div>
-        <div class="col p-2 bg-info">info</div>
-        <div class="col p-2 bg-warning">warning</div>
-        <div class="col p-2 bg-success">succes</div>
-        <div class="col p-2 bg-danger">danger</div>
-    </div -->
+
 @endsection

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<b><a class="navbar-brand" href="{{route('/')}}">Plata</a></b> <a
-		class="navbar-brand" href="{{route('/')}}">Escritorio</a>
+		class="navbar-brand" href="{{route('home')}}">Escritorio</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -14,11 +14,10 @@
 				href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false"> Cursos y preguntas </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{route('/')}}">Administracion
-						Cursos Temas Grados</a> <a class="dropdown-item"
-						href="{{route('/')}}">Crear un curso</a>
+					<a class="dropdown-item" href="{{route('GestorTGC.index')}}">Gestor Temas Cursos Grados</a> <a class="dropdown-item"
+						href="{{route('GestorReactivos.create')}}">Gestor reactivos</a>
 					<div class="dropdown-divider"></div>
-				    <a class="dropdown-item" href="{{route('/')}}">Reactivos</a>
+				    
 				</div></li>
 			<li>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">

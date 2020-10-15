@@ -7,4 +7,12 @@
       	<div class="credits">
      	</div>
     </div>
+        <div class="row">
+        <div class="col bg-primary" style="height: 1rem"></div>
+        <div class="col bg-secondary" style="height: 1rem"></div>
+        <div class="col bg-info" style="height: 1rem"></div>
+        <div class="col bg-warning" style="height: 1rem"></div>
+        <div class="col bg-success" style="height: 1rem"></div>
+        <div class="col bg-danger" style="height: 1rem"></div>
+    </div>
  </footer>

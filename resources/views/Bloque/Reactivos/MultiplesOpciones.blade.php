@@ -7,8 +7,8 @@
                  </div>
             </div>
        </div>
-    <div class="row">
-            <div class="col ml-4 pl-1"">
+    <div class="row" >
+            <div class="col ml-4 pl-1">
                 @if($Correctas>1)
                     <b>Selecciona las opciones correctas</b>
                 @elseif($Correctas == 1 && $Incorrectas >1)
