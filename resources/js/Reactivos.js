@@ -38,7 +38,7 @@ if ($("#CrearReactivos").length != 0) {
                     EnunciadosRespuestas: [],
                     opcionesSeleccionadas: [],
                     SeleccionarTodaLista: [],
-                    
+
                     SeleccionarTodasCorrectasLista: [],
                     ValorRespuestas: [],
                     Previsualizacion:"",
@@ -102,7 +102,7 @@ if ($("#CrearReactivos").length != 0) {
                     this.opcionesSeleccionadas.forEach((elemento,index)=>{
                         if(elemento && this.ValorRespuestas[index])
                            this.TotalNumeroCorrectas = 1+this.TotalNumeroCorrectas;
-                        else
+                        else if(elemento)
                             this.TotalIncorrectas = 1+this.TotalIncorrectas;
                     });
                     return (this.TotalIncorrectas>0 &&  this.TotalNumeroCorrectas >0)&& (this.Reactivo.length>0) ;

@@ -11,8 +11,10 @@
             <div class="col ml-4 pl-1"">
                 @if($Correctas>1)
                     <b>Selecciona las opciones correctas</b>
-                @elseif($Correctas == 1)
+                @elseif($Correctas == 1 && $Incorrectas >1)
                     <b>Selecciona la opcion correcta</b>
+                @else
+                    <b></b>
                 @endif
             </div>
         </div>

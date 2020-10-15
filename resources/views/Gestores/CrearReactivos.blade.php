@@ -48,94 +48,97 @@
                 </div>
             </tab-content>
             <tab-content title="Crear pregunta" icon="fa fa-settings" :before-change="validar2">
-                <div class="justify-content-center" v-if="SelectTipoPreg === 'Opciones multiples' ">
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-md-10 col-xl-8">
-                            <div class="text-center"> Pregunta</div>
-                            <div>
-                                <editor-tiny class="bg-white border border-black"
-                                    :images_upload_url="'{{ route('Gestor/uploadImagen') }}'" :token="'{{ csrf_token() }}'"
-                                    name="Reactivo" v-model="Reactivo"></editor-tiny>
+                <div class="justify-content-center">
+                    <template v-if="SelectTipoPreg === 'Opciones multiples' ">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-10 col-xl-8">
+                                <div class="text-center"> Pregunta</div>
+                                <div>
+                                    <editor-tiny class="bg-white border border-black"
+                                        :images_upload_url="'{{ route('Gestor/uploadImagen') }}'"
+                                        :token="'{{ csrf_token() }}'" name="Reactivo" v-model="Reactivo"></editor-tiny>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row justify-content-center p-2">
-                        <div class="col-4">
-                            <a class="btn btn-secondary text-light" target="_blank"
-                                href="{{ route('GestorOpciones.index') }}?tipo=OpcionesMultiples">Crear lista de
-                                respuestas</a>
+                        <div class="row justify-content-center p-2">
+                            <div class="col-4">
+                                <a class="btn btn-secondary text-light" target="_blank"
+                                    href="{{ route('GestorOpciones.index') }}?tipo=OpcionesMultiples">Crear lista de
+                                    respuestas</a>
+                            </div>
+                            <div class="col-4">
+                                <button class="btn btn-secondary text-light" type="button"
+                                    v-on:click="verRespuestas=!verRespuestas">Seleccionar respuestas</button>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <button class="btn btn-secondary text-light" type="button"
-                                v-on:click="verRespuestas=!verRespuestas">Seleccionar respuestas</button>
-                        </div>
-                    </div>
-                </div>
-                <div v-if="verRespuestas" class="row  p-2">
 
-                    <div class="col-md-4 col-12 overflow-auto" style="height: 20rem">
-                        <div class="btn-group-toggle" data-toggle="buttons">
-                            <input placeholder="Filtrar listas"> <input type="checkbox"> Solo mis listas
+                        <div v-if="verRespuestas" class="row  p-2">
+                            <div class="col-md-4 col-12 overflow-auto" style="height: 20rem">
+                                <div class="btn-group-toggle" data-toggle="buttons">
+                                    <input placeholder="Filtrar listas"> <input type="checkbox"> Solo mis listas
+                                </div>
+                                <b-form-group label="Listas de opciones">
+                                    <b-form-checkbox-group data-spy="scroll" data-offset="20" v-model="ListasActivas"
+                                        :options="optionsListas" name="buttons-1" @change="ListaSelected" switches size="sm"
+                                        stacked></b-form-checkbox-group>
+                                </b-form-group>
+                            </div>
+                            <div class="col-md-8 col-12 p-0">
+                                <table class="table p-0 m-0 table-sm table-light table-striped">
+                                    <template v-for="(Activo) in ListasActivas">
+                                        <thead class="thead-dark p-0 mt-2">
+                                            <tr>
+                                                <th scope="col"><input type="checkbox" :id="'Lista_'+Activo"
+                                                        v-model="SeleccionarTodaLista[Activo]"
+                                                        v-on:click="SeleccionarTodosLista(Activo)"> </th>
+                                                <th scope="col"><label :for="'Lista_'+Activo">
+                                                        @{{ NombresDeListas[Activo] }}<label>
+                                                </th>
+                                                <th scope="col">
+                                                    correctas
+                                                    <div class="">
+                                                        <input type="checkbox" :id="'Lista_'+Activo"
+                                                            v-model="SeleccionarTodasCorrectasLista[Activo]"
+                                                            v-on:click="SeleccionarTodasCorrectas(Activo)"
+                                                            :disabled="!SeleccionarTodaLista[Activo]" class="form-control">
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr :class="(opcionesSeleccionadas[Elemento] &&ValorRespuestas[Elemento] ) ?'bg-success':(opcionesSeleccionadas[Elemento])?'bg-danger':''"
+                                                v-for="Elemento in ElementosEnLista[Activo]" :for="'Resp_'+Activo">
+                                                <td :for="'Resp_'+Elemento"><input type="checkbox" ff3434
+                                                        v-model="opcionesSeleccionadas[Elemento]" class="my-auto"
+                                                        :id="'Resp_'+Elemento"></td>
+                                                <td>
+                                                    <label class="row m-0" :for="'Resp_'+Elemento">
+                                                        <div class="col-10 bg-white p-2 m-0"
+                                                            v-html="EnunciadosRespuestas[Elemento].substr(0,45)"></div>
+                                                        <div class="col-1 p-2 m-0"><button class="bg-aqua"
+                                                                @click="showOpcion(Elemento)"><i class="fa fa-eye"
+                                                                    aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        <input class="form-control  my-auto" type="checkbox"
+                                                            v-model="ValorRespuestas[Elemento]"
+                                                            :disabled="!opcionesSeleccionadas[Elemento]">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </template>
+                                </table>
+                            </div>
                         </div>
-                        <b-form-group label="Listas de opciones">
-                            <b-form-checkbox-group data-spy="scroll" data-offset="20" v-model="ListasActivas"
-                                :options="optionsListas" name="buttons-1" @change="ListaSelected" switches size="sm"
-                                stacked></b-form-checkbox-group>
-                        </b-form-group>
-                    </div>
-                    <div class="col-md-8 col-12 p-0">
-                        <table class="table p-0 m-0 table-sm table-light table-striped">
-                            <template v-for="(Activo) in ListasActivas">
-                                <thead class="thead-dark p-0 mt-2">
-                                    <tr>
-                                        <th scope="col"><input type="checkbox" :id="'Lista_'+Activo"
-                                                v-model="SeleccionarTodaLista[Activo]"
-                                                v-on:click="SeleccionarTodosLista(Activo)"> </th>
-                                        <th scope="col"><label :for="'Lista_'+Activo"> @{{ NombresDeListas[Activo] }}<label>
-                                        </th>
-                                        <th scope="col">
-                                            correctas
-                                            <div class="">
-                                                <input type="checkbox" :id="'Lista_'+Activo"
-                                                    v-model="SeleccionarTodasCorrectasLista[Activo]"
-                                                    v-on:click="SeleccionarTodasCorrectas(Activo)"
-                                                    :disabled="!SeleccionarTodaLista[Activo]" class="form-control">
-                                            </div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr :class="(opcionesSeleccionadas[Elemento] &&ValorRespuestas[Elemento] ) ?'bg-success':(opcionesSeleccionadas[Elemento])?'bg-danger':''"
-                                        v-for="Elemento in ElementosEnLista[Activo]" :for="'Resp_'+Activo">
-                                        <td :for="'Resp_'+Elemento"><input type="checkbox" ff3434
-                                                v-model="opcionesSeleccionadas[Elemento]" class="my-auto"
-                                                :id="'Resp_'+Elemento"></td>
-                                        <td>
-                                            <label class="row m-0" :for="'Resp_'+Elemento">
-                                                <div class="col-10 bg-white p-2 m-0"
-                                                    v-html="EnunciadosRespuestas[Elemento].substr(0,45)"></div>
-                                                <div class="col-1 p-2 m-0"><button class="bg-aqua"
-                                                        @click="showOpcion(Elemento)"><i class="fa fa-eye"
-                                                            aria-hidden="true"></i></button>
-                                                </div>
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <input class="form-control  my-auto" type="checkbox"
-                                                    v-model="ValorRespuestas[Elemento]"
-                                                    :disabled="!opcionesSeleccionadas[Elemento]">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </template>
-                        </table>
-                    </div>
+                        <b-modal ref="my-modal-opcion" hide-footer title="Using Component Methods">
+                            <div v-html="EnunciadosRespuestas[verOpcion]"> </div>
+                        </b-modal>
+                    </template>
                 </div>
-                <b-modal ref="my-modal-opcion" hide-footer title="Using Component Methods">
-                    <div v-html="EnunciadosRespuestas[verOpcion]"> </div>
-                </b-modal>
             </tab-content>
             <tab-content title="Retroalimentacion" icon="fa fa-check" :before-change="validar3">
                 <h1 class="text-center">Retroalimentación</h1>
@@ -160,19 +163,20 @@
                                 aleatorio</button>
                         </div>
                     </div>
-                    <div v-html="Previsualizacion"> </div>
+                    <div class="row">
+                        <div class=" col overflow-auto" v-html="Previsualizacion"> </div>
+                    </div>
                 </div>
             </tab-content>
         </form-wizard>
 
-        <div class="row">
-            <div class="col bg-primary">primary</div>
-            <div class="col bg-secondary">secundaty</div>
-            <div class="col bg-info">info</div>
-            <div class="col bg-warning">warning</div>
-            <div class="col bg-success">succes</div>
-            <div class="col bg-danger">danger</div>
-        </div>
     </div>
-
+    <div class="row">
+        <div class="col p-2 bg-primary">primary</div>
+        <div class="col p-2 bg-secondary">secundaty</div>
+        <div class="col p-2 bg-info">info</div>
+        <div class="col p-2 bg-warning">warning</div>
+        <div class="col p-2 bg-success">succes</div>
+        <div class="col p-2 bg-danger">danger</div>
+    </div>
 @endsection

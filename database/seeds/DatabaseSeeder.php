@@ -16,21 +16,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
+
         $user0 = new User();
         $user0->Nombre = 'Cesar';
         $user0->email = 'admin@admin.com';
         $user0->Nombre_de_Usuario="Cesar_G";
         $user0->password = bcrypt('password');
         $user0->save();
-        
+
         $user0 = new User();
         $user0->Nombre = 'Eduardo Gabriel';
         $user0->Apellido='Guzman Lopez';
         $user0->email = 'admin2@admin.com';
         $user0->password = bcrypt('password');
         $user0->save();
-        
+
         $user0 = new User();
         $user0->Nombre = 'Miguel';
         $user0->email = 'admin3@admin.com';
@@ -41,29 +41,39 @@ class DatabaseSeeder extends Seeder
         $user0->email = 'admin4@admin.com';
         $user0->password = bcrypt('password');
         $user0->save();
-        
-        
+
+
         $Tipos = new ReactivosGruposTipo();
         $Tipos->Nombre = "Opciones multiples";
         $Tipos->Descripcion="Preguntas que pueden tener única opción u opciones múltiples";
-
         $Tipos->save();
-        
         $Tipo = new ReactivosTipo();
         $Tipo->Nombre_Tipo= "Opcion unica";
         $Tipo->Activo = true;
         $Tipo->Datos=json_encode(" ");
-        $Tipo->ID_Grupo = 1;
-
+        $Tipo->ID_Grupo = $Tipos->id;
         $Tipo->save();
-    
         $Tipo = new ReactivosTipo();
         $Tipo->Nombre_Tipo= "Opciones Multiple";
         $Tipo->Activo = true;
         $Tipo->Datos=json_encode(" ");
-        $Tipo->ID_Grupo = 1;
+        $Tipo->ID_Grupo = $Tipos->id;
         $Tipo->save();
 
-        
+        $Tipos = new ReactivosGruposTipo();
+        $Tipos->Nombre = "Reactivos Multivariable";
+        $Tipos->Descripcion="Reactivos que tienen una o muchas variables generadas por un sistema computacional";
+        $Tipos->save();
+
+        $Tipo = new ReactivosTipo();
+        $Tipo->Nombre_Tipo= "Multivariable";
+        $Tipo->Activo = true;
+        $Tipo->Datos=json_encode(" ");
+        $Tipo->ID_Grupo = $Tipos->id;
+        $Tipo->save();
+
+
+
+
     }
-}        
+}
