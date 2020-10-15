@@ -10,7 +10,7 @@ use App\Models\ReactivosOpcionesListum;
 use Exception;
 use Illuminate\Http\Request;
 
-class opciones extends Controller
+class Opciones extends Controller
 {
     /**
      * Display a listing of the resource.
